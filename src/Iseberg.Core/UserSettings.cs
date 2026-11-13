@@ -23,6 +23,8 @@ public sealed class UserSettings
     public bool ShowToolbar { get; set; } = true;
     public bool UseDefaultSnippets { get; set; } = true;
     public bool CheckForUpdates { get; set; } = true;
+    /// <summary>Display language: "en", "de", or empty to follow the operating system.</summary>
+    public string Language { get; set; } = "";
     public int AutoSaveMinutes { get; set; } = 2;
     public int RecentFileCount { get; set; } = 10;
     public string FontFamily { get; set; } = "Lucida Console";
@@ -69,6 +71,7 @@ public sealed class UserSettings
         if (RecentFiles.Any(string.IsNullOrWhiteSpace)) throw new InvalidDataException("A recent-file path is empty.");
         if (RecentFiles.Count > RecentFileCount) RecentFiles.RemoveRange(RecentFileCount, RecentFiles.Count - RecentFileCount);
         if (Layout is not ("Top" or "Right" or "Maximized")) Layout = "Top";
+        if (Language is not ("en" or "de")) Language = "";
         DebuggerSessions ??= [];
         if (DebuggerSessions.Any(session => session is null || string.IsNullOrWhiteSpace(session.Name)) ||
             DebuggerSessions.DistinctBy(session => session.Name).Count() != DebuggerSessions.Count)

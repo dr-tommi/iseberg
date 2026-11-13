@@ -329,4 +329,79 @@
   <data name="LoadingDebuggerValue" xml:space="preserve"><value>Loading...</value></data>
   <data name="MoreDebuggerValues" xml:space="preserve"><value>Load more...</value></data>
   <data name="PauseForBreakpointEdit" xml:space="preserve"><value>Waiting for the next PowerShell statement to pause before editing breakpoints...</value></data>
+  <data name="Language" xml:space="preserve"><value>Language:</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>System default</value></data>
+  <data name="LanguageRestartHint" xml:space="preserve"><value>Takes effect after restarting Iseberg.</value></data>
+  <data name="ScriptEditorName" xml:space="preserve"><value>Script editor</value></data>
+  <data name="ScriptDiagnostics" xml:space="preserve"><value>Script diagnostics</value></data>
+  <data name="PaneDivider" xml:space="preserve"><value>Script and console pane divider</value></data>
+  <data name="ConsoleName" xml:space="preserve"><value>PowerShell console</value></data>
+  <data name="CommandsPaneDivider" xml:space="preserve"><value>Commands pane divider</value></data>
+  <data name="ZoomPercentage" xml:space="preserve"><value>Zoom percentage</value></data>
+  <data name="SessionInitFailed" xml:space="preserve"><value>Session initialization failed: {0}</value></data>
+  <data name="ExecutionPolicyTitle" xml:space="preserve"><value>Execution policy</value></data>
+  <data name="ExecutionPolicyPrompt" xml:space="preserve"><value>Set RemoteSigned for this application process? Local scripts can run; downloaded scripts still require a trusted signature. Machine and user settings are not changed, and Group Policy still applies.</value></data>
+  <data name="Enable" xml:space="preserve"><value>Enable</value></data>
+  <data name="AboutTitle" xml:space="preserve"><value>About Iseberg</value></data>
+  <data name="AboutText" xml:space="preserve"><value>Iseberg {0}
+A cross-platform PowerShell ISE-style editor and terminal.
+
+PowerShell {1}
+Avalonia + AvaloniaEdit + PowerShell SDK
+
+See README.md for implemented behavior and GitHub issues for remaining work.</value></data>
+  <data name="DuplicateFileTitle" xml:space="preserve"><value>Duplicate file</value></data>
+  <data name="DuplicateFilePrompt" xml:space="preserve"><value>This script is already open in another PowerShell tab. Open another editable copy?</value></data>
+  <data name="OpenChoice" xml:space="preserve"><value>Open</value></data>
+  <data name="SaveChangesTitle" xml:space="preserve"><value>Save changes</value></data>
+  <data name="SaveChangesPrompt" xml:space="preserve"><value>Save changes to {0}?</value></data>
+  <data name="SaveChoice" xml:space="preserve"><value>Save</value></data>
+  <data name="DontSave" xml:space="preserve"><value>Don't Save</value></data>
+  <data name="StopExecutionTitle" xml:space="preserve"><value>Stop execution</value></data>
+  <data name="StopAndCloseTab" xml:space="preserve"><value>Stop the running command and close this PowerShell tab?</value></data>
+  <data name="StopAndCloseWorkbench" xml:space="preserve"><value>Stop the running command and close this workbench?</value></data>
+  <data name="StopChoice" xml:space="preserve"><value>Stop</value></data>
+  <data name="SaveBeforeRunTitle" xml:space="preserve"><value>Save before running</value></data>
+  <data name="SaveBeforeRunPrompt" xml:space="preserve"><value>Save {0} before running?</value></data>
+  <data name="RunWithoutSaving" xml:space="preserve"><value>Run without saving</value></data>
+  <data name="RecoverTitle" xml:space="preserve"><value>Recover scripts</value></data>
+  <data name="RecoverPrompt" xml:space="preserve"><value>Recover {0} autosaved script(s) from a previous session?</value></data>
+  <data name="Recover" xml:space="preserve"><value>Recover</value></data>
+  <data name="Discard" xml:space="preserve"><value>Discard</value></data>
+  <data name="GoToLineTitle" xml:space="preserve"><value>Go to line</value></data>
+  <data name="GoToLinePrompt" xml:space="preserve"><value>Line number (1 - {0}):</value></data>
+  <data name="SettingsLoadFailed" xml:space="preserve"><value>Could not load settings</value></data>
+  <data name="PowerShellInitFailed" xml:space="preserve"><value>Could not initialize PowerShell</value></data>
+  <data name="OperationFailed" xml:space="preserve"><value>Operation failed</value></data>
+  <data name="OpenScriptTitle" xml:space="preserve"><value>Open script</value></data>
+  <data name="SaveScriptTitle" xml:space="preserve"><value>Save script</value></data>
+  <data name="ScriptFilesFilter" xml:space="preserve"><value>PowerShell scripts</value></data>
+  <data name="ScriptFileFilter" xml:space="preserve"><value>PowerShell script</value></data>
+  <data name="SnippetFilesFilter" xml:space="preserve"><value>PowerShell snippets</value></data>
+  <data name="LocalScriptOnly" xml:space="preserve"><value>Only local script files are supported.</value></data>
+  <data name="LocalSnippetOnly" xml:space="preserve"><value>Only local snippet files are supported.</value></data>
+  <data name="LocalThemeOnly" xml:space="preserve"><value>Only local theme files are supported.</value></data>
+  <data name="ThemeNameInvalid" xml:space="preserve"><value>Enter a non-empty name other than a built-in theme.</value></data>
+  <data name="EditedWhileSaving" xml:space="preserve"><value>The document was edited while saving. Closing was canceled to preserve those edits.</value></data>
+  <data name="StopBeforeClose" xml:space="preserve"><value>Stop execution before closing a script.</value></data>
+  <data name="ReopenRemoteBeforeRun" xml:space="preserve"><value>Reopen this script in its remote connection before running it.</value></data>
+  <data name="RemoteRunNeedsRemoteFile" xml:space="preserve"><value>Open or save the script on the remote machine before running a named script. F8 can run local text remotely.</value></data>
+  <data name="SaveToRunWithBreakpoints" xml:space="preserve"><value>Save this script to run with breakpoints.</value></data>
+  <data name="OnlineHelpOpenFailed" xml:space="preserve"><value>The system could not open the online help URL.</value></data>
+  <data name="NoOnlineHelp" xml:space="preserve"><value>This command does not publish an online help URL. Enable local help in Options.</value></data>
+  <data name="ReplaceWhileDebugging" xml:space="preserve"><value>Resume or stop debugging before replacing script text.</value></data>
+  <data name="InvalidLineNumber" xml:space="preserve"><value>Enter a valid line number.</value></data>
+  <data name="BreakpointWrongRunspace" xml:space="preserve"><value>This file is not in the active runspace. Open the remote copy before setting breakpoints.</value></data>
+  <data name="SelectBreakpointToEdit" xml:space="preserve"><value>Select a breakpoint to edit.</value></data>
+  <data name="WaitForDebuggerEvaluation" xml:space="preserve"><value>Wait for debugger evaluation to finish before editing breakpoints.</value></data>
+  <data name="BreakpointEditPending" xml:space="preserve"><value>A breakpoint edit is already waiting for execution to pause.</value></data>
+  <data name="StopBeforeReload" xml:space="preserve"><value>Stop execution before reloading a script.</value></data>
+  <data name="SaveBeforeReload" xml:space="preserve"><value>Save the script before reloading it.</value></data>
+  <data name="ReopenRemoteDocument" xml:space="preserve"><value>Reopen the remote document in its owning connection.</value></data>
+  <data name="EditedWhileReading" xml:space="preserve"><value>The document was edited while reading the file. Reload was canceled.</value></data>
+  <data name="ReopenRemoteBeforeSave" xml:space="preserve"><value>Reopen the remote document in its owning connection before saving.</value></data>
+  <data name="SelectPowerShellTab" xml:space="preserve"><value>Select a PowerShell tab.</value></data>
+  <data name="SelectBreakpointKind" xml:space="preserve"><value>Select a breakpoint kind.</value></data>
+  <data name="PositiveLineNumber" xml:space="preserve"><value>Enter a positive line number.</value></data>
+  <data name="AllModulesFilter" xml:space="preserve"><value>All</value></data>
 </root>

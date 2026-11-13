@@ -23,6 +23,7 @@ public sealed partial class OptionsWindow : Window
     private readonly PowerShellColorizer sampleColorizer = new();
     private AccessibleTextEditor SampleEditor => SampleEditorControl.TextEditor;
     private readonly string[] layouts = ["Top", "Right", "Maximized"];
+    private readonly string[] languages = [.. UiLanguage.Codes];
     public UserSettings Draft => draft.Copy();
 
     public OptionsWindow() : this(new UserSettings(), _ => Task.CompletedTask) { }
@@ -45,6 +46,17 @@ public sealed partial class OptionsWindow : Window
         EditorFontSize.ItemsSource = new double[] { 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 28, 32, 36, 48, 72 }
             .Append(draft.FontSize).Distinct().Order().ToArray();
         PanePosition.ItemsSource = layouts.Select(UiText.Get).ToArray();
+        DisplayLanguage.ItemsSource = languages.Select(UiLanguage.DisplayName).ToArray();
+        if (UiText.IsTranslated)
+        {
+            // The fixed widths reproduce the English ISE dialog; translated captions may need more room.
+            foreach (var button in new[] { RestoreDefaults, AcceptOptions, CancelOptions, ApplyOptions })
+            {
+                button.MinWidth = button.Width;
+                button.Width = double.NaN;
+                button.Padding = new Thickness(6, 0);
+            }
+        }
         CompletionTimeout.ItemsSource = Enumerable.Range(1, 30).ToArray();
         NamedColor.ItemsSource = typeof(Colors).GetProperties().Where(p => p.PropertyType == typeof(Color) && p.Name != "Transparent")
             .Select(p => p.Name).Order().ToArray();
@@ -80,7 +92,7 @@ public sealed partial class OptionsWindow : Window
                 if (box == FixedWidthOnly) PopulateFonts();
                 UpdateDraft();
             };
-        foreach (var combo in new[] { EditorFont, EditorFontSize, PanePosition, CompletionTimeout })
+        foreach (var combo in new[] { EditorFont, EditorFontSize, PanePosition, CompletionTimeout, DisplayLanguage })
             combo.SelectionChanged += (_, _) => UpdateDraft();
         AutoSaveInterval.TextChanged += (_, _) => UpdateDraft();
         RecentFileCount.TextChanged += (_, _) => UpdateDraft();
@@ -175,6 +187,7 @@ public sealed partial class OptionsWindow : Window
         CheckForUpdates.IsChecked = draft.CheckForUpdates;
         FixedWidthOnly.IsChecked = draft.FixedWidthFontsOnly;
         PanePosition.SelectedIndex = Array.IndexOf(layouts, draft.Layout);
+        DisplayLanguage.SelectedIndex = Math.Max(0, Array.IndexOf(languages, draft.Language));
         CompletionTimeout.SelectedItem = draft.IntelliSenseTimeoutSeconds;
         AutoSaveInterval.Text = draft.AutoSaveMinutes.ToString(CultureInfo.InvariantCulture);
         RecentFileCount.Text = draft.RecentFileCount.ToString(CultureInfo.InvariantCulture);
@@ -225,6 +238,7 @@ public sealed partial class OptionsWindow : Window
         draft.CheckForUpdates = CheckForUpdates.IsChecked == true;
         draft.FixedWidthFontsOnly = FixedWidthOnly.IsChecked == true;
         draft.Layout = layouts[Math.Max(0, PanePosition.SelectedIndex)];
+        draft.Language = languages[Math.Max(0, DisplayLanguage.SelectedIndex)];
         if (CompletionTimeout.SelectedItem is int timeout) draft.IntelliSenseTimeoutSeconds = timeout;
         if (EditorFont.SelectedItem is string font) draft.FontFamily = font;
         if (EditorFontSize.SelectedItem is double size) draft.FontSize = size;
@@ -292,7 +306,7 @@ public sealed partial class OptionsWindow : Window
         if (SampleEditor is null) return;
         Width = 534 * DesktopTheme.TextScale;
         Height = 562 * DesktopTheme.TextScale;
-        ThemeName.Text = draft.Theme.Name;
+        ThemeName.Text = UiText.Translate(draft.Theme.Name, "DefaultTheme", "LightTheme", "DarkTheme", "CustomTheme");
         SampleEditor.FontFamily = new FontFamily(draft.FontFamily + ", Consolas, DejaVu Sans Mono, monospace");
         SampleEditor.FontSize = draft.FontSize * 4 / 3;
         var pane = colorKey?.StartsWith("Console.") == true || colorKey?.StartsWith("Stream.") == true ? "Console" : "Script";
@@ -393,7 +407,7 @@ public sealed partial class OptionsWindow : Window
                             });
                             if (files.Count == 0) return;
                             var imported = await ThemeFile.LoadAsync(files[0].TryGetLocalPath() ??
-                                throw new IOException("Only local theme files are supported."));
+                                throw new IOException(UiText.Get("LocalThemeOnly")));
                             if (themes.Take(3).Any(theme => theme.Name == imported.Theme.Name))
                                 throw new InvalidDataException(UiText.Get("ThemeBuiltinName"));
                             if (draft.CustomThemes.Any(theme => theme.Name == imported.Theme.Name) &&
@@ -415,7 +429,7 @@ public sealed partial class OptionsWindow : Window
                             });
                             if (file is null) return;
                             await ThemeFile.FromSettings(draft).SaveAsync(file.TryGetLocalPath() ??
-                                throw new IOException("Only local theme files are supported."));
+                                throw new IOException(UiText.Get("LocalThemeOnly")));
                         }
                     }
                     catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or JsonException or InvalidDataException)
@@ -432,7 +446,7 @@ public sealed partial class OptionsWindow : Window
                     if (name is null) return;
                     if (string.IsNullOrWhiteSpace(name) || themes.Take(3).Any(t => t.Name == name.Trim()))
                     {
-                        await Dialogs.ChooseAsync(manager, UiText.Get("ManageThemes"), "Enter a non-empty name other than a built-in theme.", UiText.Get("OK"));
+                        await Dialogs.ChooseAsync(manager, UiText.Get("ManageThemes"), UiText.Get("ThemeNameInvalid"), UiText.Get("OK"));
                         return;
                     }
                     var saved = draft.Theme.Copy(); saved.Name = name.Trim();

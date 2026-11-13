@@ -30,10 +30,10 @@ public sealed partial class WorkbenchControl
         VerifyAvailable();
         var owner = DocumentOwner(tab);
         if (owner.Engine.State is SessionState.Running or SessionState.Debugging)
-            throw new InvalidOperationException("Stop execution before reloading a script.");
-        if (tab.File.Path is not { } path) throw new InvalidOperationException("Save the script before reloading it.");
+            throw new InvalidOperationException(UiText.Get("StopBeforeReload"));
+        if (tab.File.Path is not { } path) throw new InvalidOperationException(UiText.Get("SaveBeforeReload"));
         if (tab.File.IsRemote && !FileInCurrentRunspace(owner, tab))
-            throw new InvalidOperationException("Reopen the remote document in its owning connection.");
+            throw new InvalidOperationException(UiText.Get("ReopenRemoteDocument"));
         if (confirm && tab.File.IsDirty &&
             await Dialogs.ChooseAsync(HostWindow, UiText.Get("ReloadFile"), string.Format(UiText.Get("ReloadConfirm"), tab.File.Name),
                 UiText.Get("ReloadFile"), UiText.Get("Cancel")) != UiText.Get("ReloadFile"))
@@ -43,7 +43,7 @@ public sealed partial class WorkbenchControl
         var replacement = await ReadFileAsync(owner, path, tab.File.IsRemote, encoding ?? tab.File.EncodingChoice);
         if (replacement is null) return false;
         if (tab.Document.Text != text || tab.File.EncodingChoice != previousEncoding)
-            throw new InvalidOperationException("The document was edited while reading the file. Reload was canceled.");
+            throw new InvalidOperationException(UiText.Get("EditedWhileReading"));
         if (displayedFile == tab) tab.File.CaretOffset = ScriptEditor.CaretOffset;
         tab.Reload(replacement);
         notifiedFileVersions.Remove(tab.RecoveryId);
@@ -99,7 +99,7 @@ public sealed partial class WorkbenchControl
     private async Task<bool> SaveWithConflictCheckAsync(SessionModel owner, ScriptTab tab, string path, bool remote)
     {
         if (remote && tab.File.IsRemote && !FileInCurrentRunspace(owner, tab))
-            throw new InvalidOperationException("Reopen the remote document in its owning connection before saving.");
+            throw new InvalidOperationException(UiText.Get("ReopenRemoteBeforeSave"));
         var version = remote ? await owner.Engine.GetRemoteFileVersionAsync(path) : await ScriptFile.ReadVersionAsync(path);
         var original = remote ? tab.File.IsRemote && string.Equals(tab.File.Path, path, StringComparison.Ordinal) :
             !tab.File.IsRemote && SameScript(tab.File.Path, path);

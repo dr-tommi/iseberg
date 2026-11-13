@@ -247,7 +247,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or JsonException or InvalidDataException)
         {
             if (!managesWindow) throw;
-            await ReportErrorAsync("Could not load settings", exception);
+            await ReportErrorAsync(UiText.Get("SettingsLoadFailed"), exception);
         }
         ApplyWindowGeometry();
         debuggerDockWidth = new(settings.Geometry.DebuggerWidth);
@@ -322,8 +322,8 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         catch (Exception exception) when (exception is RuntimeException or InvalidOperationException or IOException)
         {
             if (!managesWindow) throw;
-            session.Console.Append(new($"Session initialization failed: {exception.Message}\n", OutputKind.Error));
-            await ReportErrorAsync("Could not initialize PowerShell", exception);
+            session.Console.Append(new(string.Format(UiText.Get("SessionInitFailed"), exception.Message) + "\n", OutputKind.Error));
+            await ReportErrorAsync(UiText.Get("PowerShellInitFailed"), exception);
         }
         RefreshState();
         FocusConsoleInput();
@@ -642,17 +642,16 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             case "AutoProfiles": settings.LoadProfiles = !settings.LoadProfiles; UpdateMenuState(); await SaveSettingsAsync(); break;
             case "ExecutionPolicy":
                 if (session is not null && OperatingSystem.IsWindows() &&
-                    await Dialogs.ChooseAsync(HostWindow, "Execution policy",
-                        "Set RemoteSigned for this application process? Local scripts can run; downloaded scripts still require a trusted signature. Machine and user settings are not changed, and Group Policy still applies.",
-                        "Enable", "Cancel") == "Enable")
+                    await Dialogs.ChooseAsync(HostWindow, UiText.Get("ExecutionPolicyTitle"), UiText.Get("ExecutionPolicyPrompt"),
+                        UiText.Get("Enable"), UiText.Get("Cancel")) == UiText.Get("Enable"))
                     await session.Engine.ExecuteAsync("Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned -Force");
                 break;
             case "Options": await OptionsAsync(); break;
             case "CheckForUpdates": await CheckForUpdatesAsync(automatic: false); break;
             case "Print": await PrintScriptAsync(); break;
             case "About":
-                await Dialogs.ShowTextAsync(HostWindow, "About Iseberg",
-                    $"Iseberg {ApplicationVersion}\nA cross-platform PowerShell ISE-style editor and terminal.\n\nPowerShell {session?.Engine.Version}\nAvalonia + AvaloniaEdit + PowerShell SDK\n\nSee README.md for implemented behavior and GitHub issues for remaining work.");
+                await Dialogs.ShowTextAsync(HostWindow, UiText.Get("AboutTitle"),
+                    string.Format(UiText.Get("AboutText"), ApplicationVersion, session?.Engine.Version));
                 break;
         }
         if (action is "Copy" or "Cut" or "Paste" or "Undo" or "Redo" or "SelectAll") FocusInput(editTarget);
@@ -663,13 +662,13 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
     {
         var files = await StorageProvider.OpenFilePickerAsync(new()
         {
-            Title = "Open script",
+            Title = UiText.Get("OpenScriptTitle"),
             AllowMultiple = true,
-            FileTypeFilter = [new("PowerShell scripts") { Patterns = ["*.ps1", "*.psm1", "*.psd1"] }, FilePickerFileTypes.All]
+            FileTypeFilter = [new(UiText.Get("ScriptFilesFilter")) { Patterns = ["*.ps1", "*.psm1", "*.psd1"] }, FilePickerFileTypes.All]
         });
         foreach (var file in files)
         {
-            var path = file.TryGetLocalPath() ?? throw new IOException("Only local script files are supported.");
+            var path = file.TryGetLocalPath() ?? throw new IOException(UiText.Get("LocalScriptOnly"));
             await OpenFileAsync(path);
         }
     }
@@ -683,7 +682,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         var fullPath = Path.GetFullPath(path);
         if (settings.WarnDuplicateFiles && Workbench.Sessions.Where(s => s != session).SelectMany(s => s.Files)
                 .Any(t => !t.File.IsRemote && string.Equals(t.File.Path, fullPath, OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal)) &&
-            await Dialogs.ChooseAsync(HostWindow, "Duplicate file", "This script is already open in another PowerShell tab. Open another editable copy?", "Open", "Cancel") != "Open")
+            await Dialogs.ChooseAsync(HostWindow, UiText.Get("DuplicateFileTitle"), UiText.Get("DuplicateFilePrompt"), UiText.Get("OpenChoice"), UiText.Get("Cancel")) != UiText.Get("OpenChoice"))
             return;
         var existing = session.Files.FirstOrDefault(tab => !tab.File.IsRemote && string.Equals(tab.File.Path, fullPath,
             OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal));
@@ -729,14 +728,14 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         {
             var result = await StorageProvider.SaveFilePickerAsync(new()
             {
-                Title = "Save script",
+                Title = UiText.Get("SaveScriptTitle"),
                 SuggestedFileName = tab.File.Name,
                 DefaultExtension = "ps1",
                 ShowOverwritePrompt = true,
-                FileTypeChoices = [new("PowerShell script") { Patterns = ["*.ps1"] }, FilePickerFileTypes.All]
+                FileTypeChoices = [new(UiText.Get("ScriptFileFilter")) { Patterns = ["*.ps1"] }, FilePickerFileTypes.All]
             });
             if (result is null) return false;
-            path = result.TryGetLocalPath() ?? throw new IOException("Only local script files are supported.");
+            path = result.TryGetLocalPath() ?? throw new IOException(UiText.Get("LocalScriptOnly"));
         }
         var previousPath = tab.File.Path;
         if (!await SaveWithConflictCheckAsync(owner, tab, path, remote: false)) return false;
@@ -778,17 +777,18 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
     private async Task<bool> ConfirmSaveAsync(ScriptTab tab)
     {
         if (!tab.File.IsDirty) return true;
-        var result = await Dialogs.ChooseAsync(HostWindow, "Save changes", $"Save changes to {tab.File.Name}?", "Save", "Don't Save", "Cancel");
-        if (result == "Don't Save") return true;
-        if (result != "Save" || !await SaveFileAsync(tab)) return false;
-        if (tab.File.IsDirty) throw new InvalidOperationException("The document was edited while saving. Closing was canceled to preserve those edits.");
+        var result = await Dialogs.ChooseAsync(HostWindow, UiText.Get("SaveChangesTitle"), string.Format(UiText.Get("SaveChangesPrompt"), tab.File.Name),
+            UiText.Get("SaveChoice"), UiText.Get("DontSave"), UiText.Get("Cancel"));
+        if (result == UiText.Get("DontSave")) return true;
+        if (result != UiText.Get("SaveChoice") || !await SaveFileAsync(tab)) return false;
+        if (tab.File.IsDirty) throw new InvalidOperationException(UiText.Get("EditedWhileSaving"));
         return true;
     }
 
     private async Task<bool> CloseFileAsync(SessionModel session, ScriptTab tab)
     {
         if (session.Engine.State is SessionState.Running or SessionState.Debugging or SessionState.NestedPrompt)
-            throw new InvalidOperationException("Stop execution before closing a script.");
+            throw new InvalidOperationException(UiText.Get("StopBeforeClose"));
         if (!await ConfirmSaveAsync(tab)) return false;
         await autoSaveTask;
         RemoveRecovery(tab.RecoveryId);
@@ -819,7 +819,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
     {
         if (session.Engine.State is SessionState.Running or SessionState.Debugging or SessionState.NestedPrompt)
         {
-            if (await Dialogs.ChooseAsync(HostWindow, "Stop execution", "Stop the running command and close this PowerShell tab?", "Stop", "Cancel") != "Stop")
+            if (await Dialogs.ChooseAsync(HostWindow, UiText.Get("StopExecutionTitle"), UiText.Get("StopAndCloseTab"), UiText.Get("StopChoice"), UiText.Get("Cancel")) != UiText.Get("StopChoice"))
                 return false;
             await session.Engine.StopAsync();
         }
@@ -853,17 +853,18 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         else
         {
             if (file.File.IsRemote && !FileInCurrentRunspace(session, file))
-                throw new InvalidOperationException("Reopen this script in its remote connection before running it.");
+                throw new InvalidOperationException(UiText.Get("ReopenRemoteBeforeRun"));
             if (session.Engine.IsRemote && file.File.Path is not null && !file.File.IsRemote)
-                throw new InvalidOperationException("Open or save the script on the remote machine before running a named script. F8 can run local text remotely.");
+                throw new InvalidOperationException(UiText.Get("RemoteRunNeedsRemoteFile"));
             if (settings.PromptToSaveBeforeRun && file.File.IsDirty)
             {
-                var answer = await Dialogs.ChooseAsync(HostWindow, "Save before running", $"Save {file.File.Name} before running?", "Save", "Run without saving", "Cancel");
-                if (answer is null or "Cancel") return;
-                if (answer == "Save" && !await SaveFileAsync(file)) return;
-                if (answer == "Run without saving")
+                var answer = await Dialogs.ChooseAsync(HostWindow, UiText.Get("SaveBeforeRunTitle"), string.Format(UiText.Get("SaveBeforeRunPrompt"), file.File.Name),
+                    UiText.Get("SaveChoice"), UiText.Get("RunWithoutSaving"), UiText.Get("Cancel"));
+                if (answer is null || answer == UiText.Get("Cancel")) return;
+                if (answer == UiText.Get("SaveChoice") && !await SaveFileAsync(file)) return;
+                if (answer == UiText.Get("RunWithoutSaving"))
                 {
-                    if (file.File.Breakpoints.Count > 0) throw new InvalidOperationException("Save this script to run with breakpoints.");
+                    if (file.File.Breakpoints.Count > 0) throw new InvalidOperationException(UiText.Get("SaveToRunWithBreakpoints"));
                     await session.Engine.ExecuteAsync(file.File.Text);
                     await RefreshDebuggerAsync(session, reconcile: true);
                     FlushOutput(); RefreshState(); return;
@@ -1166,12 +1167,12 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         {
             var scripts = await recovery.ReadAsync();
             if (scripts.Count == 0 || Workbench.SelectedSession is not { } session) return;
-            var answer = await Dialogs.ChooseAsync(HostWindow, "Recover scripts", $"Recover {scripts.Count} autosaved script(s) from a previous session?",
-                "Recover", "Discard", "Cancel");
-            if (answer is null or "Cancel") return;
+            var answer = await Dialogs.ChooseAsync(HostWindow, UiText.Get("RecoverTitle"), string.Format(UiText.Get("RecoverPrompt"), scripts.Count),
+                UiText.Get("Recover"), UiText.Get("Discard"), UiText.Get("Cancel"));
+            if (answer is null || answer == UiText.Get("Cancel")) return;
             foreach (var script in scripts)
             {
-                if (answer == "Recover")
+                if (answer == UiText.Get("Recover"))
                 {
                     var owningSession = Workbench.Sessions.FirstOrDefault(candidate => candidate.Name == script.SessionName) ?? session;
                     var target = restoredRecoveryTargets.GetValueOrDefault(script.Id, (owningSession, null));
@@ -1399,7 +1400,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
     {
         if (windowClosed) return;
         updatingCommandList = true;
-        ModuleFilter.ItemsSource = new[] { "All" }.Concat((displayedSession?.Commands ?? [])
+        ModuleFilter.ItemsSource = new[] { UiText.Get("AllModulesFilter") }.Concat((displayedSession?.Commands ?? [])
             .Select(c => c.Module).Where(m => m.Length > 0).Distinct().Order());
         ModuleFilter.SelectedIndex = 0;
         updatingCommandList = false;
@@ -1413,7 +1414,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         var module = ModuleFilter.SelectedItem as string;
         updatingCommandList = true;
         CommandList.ItemsSource = displayedSession?.Commands.Where(c =>
-            c.Name.Contains(name, StringComparison.OrdinalIgnoreCase) && (module is null or "All" || c.Module == module)).ToArray();
+            c.Name.Contains(name, StringComparison.OrdinalIgnoreCase) && (ModuleFilter.SelectedIndex <= 0 || c.Module == module)).ToArray();
         CommandList.SelectedItem = CommandList.ItemsSource?.Cast<CommandDescription>()
             .FirstOrDefault(c => c.Name == displayedSession?.SelectedCommand);
         updatingCommandList = false;
@@ -1535,9 +1536,9 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
                     else
                     {
                         var uri = request.HelpUri ?? throw new InvalidOperationException(
-                            "This command does not publish an online help URL. Enable local help in Options.");
+                            UiText.Get("NoOnlineHelp"));
                         if (!await Launcher.LaunchUriAsync(uri))
-                            throw new InvalidOperationException("The system could not open the online help URL.");
+                            throw new InvalidOperationException(UiText.Get("OnlineHelpOpenFailed"));
                     }
                 }, request.PassThru)
             {
@@ -1573,8 +1574,8 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         if (!settings.UseLocalHelp)
         {
             var uri = await displayedSession.Engine.GetHelpUriAsync(command);
-            if (uri is null) throw new InvalidOperationException("This command does not publish an online help URL. Enable local help in Options.");
-            if (!await Launcher.LaunchUriAsync(uri)) throw new InvalidOperationException("The system could not open the online help URL.");
+            if (uri is null) throw new InvalidOperationException(UiText.Get("NoOnlineHelp"));
+            if (!await Launcher.LaunchUriAsync(uri)) throw new InvalidOperationException(UiText.Get("OnlineHelpOpenFailed"));
             return;
         }
         var document = await displayedSession.Engine.GetHelpDocumentAsync(command);
@@ -1592,7 +1593,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
 
     private async Task ReplaceAsync()
     {
-        if (ScriptEditor.IsReadOnly) throw new InvalidOperationException("Resume or stop debugging before replacing script text.");
+        if (ScriptEditor.IsReadOnly) throw new InvalidOperationException(UiText.Get("ReplaceWhileDebugging"));
         await new ReplaceWindow(ScriptEditor).ShowDialog(HostWindow);
         ScriptEditor.TextArea.Focus();
     }
@@ -1617,10 +1618,10 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
 
     private async Task GoToLineAsync()
     {
-        var input = await Dialogs.AskAsync(HostWindow, "Go to line", $"Line number (1 - {ScriptEditor.Document.LineCount}):");
+        var input = await Dialogs.AskAsync(HostWindow, UiText.Get("GoToLineTitle"), string.Format(UiText.Get("GoToLinePrompt"), ScriptEditor.Document.LineCount));
         if (input is null) return;
         if (!int.TryParse(input, out var line) || line < 1 || line > ScriptEditor.Document.LineCount)
-            throw new InvalidOperationException("Enter a valid line number.");
+            throw new InvalidOperationException(UiText.Get("InvalidLineNumber"));
         ScriptEditor.TextArea.Caret.Line = line;
         ScriptEditor.ScrollToLine(line);
         ScriptEditor.TextArea.Focus();
@@ -1687,12 +1688,12 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         var files = await StorageProvider.OpenFilePickerAsync(new()
         {
             Title = UiText.Get("ImportSnippets"), AllowMultiple = true,
-            FileTypeFilter = [new("PowerShell snippets") { Patterns = ["*.snippets.ps1xml"] }]
+            FileTypeFilter = [new(UiText.Get("SnippetFilesFilter")) { Patterns = ["*.snippets.ps1xml"] }]
         });
         var imported = new List<PowerShellSnippet>();
         foreach (var file in files)
         {
-            var path = file.TryGetLocalPath() ?? throw new IOException("Only local snippet files are supported.");
+            var path = file.TryGetLocalPath() ?? throw new IOException(UiText.Get("LocalSnippetOnly"));
             imported.AddRange(SnippetCatalog.Parse(await File.ReadAllTextAsync(path)));
         }
         if (imported.Count == 0) return;
@@ -1710,10 +1711,10 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         var file = await StorageProvider.SaveFilePickerAsync(new()
         {
             Title = UiText.Get("ExportSnippets"), SuggestedFileName = "Custom.snippets.ps1xml", ShowOverwritePrompt = true,
-            FileTypeChoices = [new("PowerShell snippets") { Patterns = ["*.snippets.ps1xml"] }]
+            FileTypeChoices = [new(UiText.Get("SnippetFilesFilter")) { Patterns = ["*.snippets.ps1xml"] }]
         });
         if (file is null) return;
-        await SnippetCatalog.SaveAsync(file.TryGetLocalPath() ?? throw new IOException("Only local snippet files are supported."), snippets);
+        await SnippetCatalog.SaveAsync(file.TryGetLocalPath() ?? throw new IOException(UiText.Get("LocalSnippetOnly")), snippets);
     }
 
     private async Task LoadProfilesAsync(SessionModel session)
@@ -1827,7 +1828,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         try { await action(); }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException or ArgumentException or RuntimeException or JsonException or NotSupportedException or System.Text.DecoderFallbackException or System.Xml.XmlException or AggregateException)
         {
-            await ReportErrorAsync("Operation failed", exception);
+            await ReportErrorAsync(UiText.Get("OperationFailed"), exception);
         }
     }
 
@@ -1837,6 +1838,6 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         ErrorOccurred?.Invoke(this, new WorkbenchErrorEventArgs(title, exception));
         if (windowClosed) return;
         StatusText.Text = title + ": " + exception.Message;
-        if (hostingOptions.ShowErrorDialogs) await Dialogs.ChooseAsync(HostWindow, title, exception.Message, "OK");
+        if (hostingOptions.ShowErrorDialogs) await Dialogs.ChooseAsync(HostWindow, title, exception.Message, UiText.Get("OK"));
     }
 }

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="CheckForUpdates" xml:space="preserve"><value>Beim Start nach Updates suchen</value></data>
+  <data name="CheckForUpdatesMenu" xml:space="preserve"><value>Nach _Updates suchen...</value></data>
+  <data name="Updates" xml:space="preserve"><value>Iseberg-Updates</value></data>
+  <data name="NoUpdateAvailable" xml:space="preserve"><value>Es ist keine neuere stabile Version verfügbar.</value></data>
+  <data name="DownloadUpdate" xml:space="preserve"><value>Update herunterladen</value></data>
+  <data name="ViewRelease" xml:space="preserve"><value>Version anzeigen</value></data>
+  <data name="Later" xml:space="preserve"><value>Später</value></data>
+  <data name="DisableUpdateChecks" xml:space="preserve"><value>Prüfung deaktivieren</value></data>
+  <data name="UpdateAvailable" xml:space="preserve"><value>Iseberg {0} ist verfügbar (aktuelle Version: {1}). Herunterladen und manuell installieren? Speichern Sie Ihre Arbeit und schließen Sie Iseberg, bevor Sie die Installation starten oder Dateien ersetzen. Für portable Builds steht das ZIP auf der Versionsseite bereit.</value></data>
+  <data name="UpdateWithoutPackage" xml:space="preserve"><value>Iseberg {0} ist verfügbar (aktuelle Version: {1}), für diese Plattform wurde aber noch kein Paket hochgeladen. Versionsseite öffnen?</value></data>
+  <data name="UpdateCheckFailed" xml:space="preserve"><value>Die Suche nach Updates oder das Öffnen des Downloads ist fehlgeschlagen. Iseberg kann weiter verwendet werden; wiederholen Sie den Vorgang über Hilfe &gt; Nach Updates suchen. {0}</value></data>
+  <data name="UpdateDownloadFailed" xml:space="preserve"><value>Der Download der Version konnte nicht im Browser geöffnet werden.</value></data>
+  <data name="Encoding" xml:space="preserve"><value>Datei_codierung...</value></data>
+  <data name="EncodingTitle" xml:space="preserve"><value>Dateicodierung</value></data>
+  <data name="EncodingHint" xml:space="preserve"><value>Konvertieren ändert die Codierung, die beim nächsten Speichern verwendet wird. Neu laden decodiert die Datei erneut und fragt nach, bevor Änderungen verworfen werden.</value></data>
+  <data name="OpenEncodingHint" xml:space="preserve"><value>Diese Datei ist kein gültiges UTF-8. Wählen Sie die Codierung ausdrücklich aus, um die Datei zu öffnen, ohne ungültige Bytes zu ersetzen.</value></data>
+  <data name="OpenWithEncoding" xml:space="preserve"><value>Mit Codierung öffnen</value></data>
+  <data name="ConvertEncoding" xml:space="preserve"><value>Beim Speichern konvertieren</value></data>
+  <data name="ReloadEncoding" xml:space="preserve"><value>Mit Codierung neu laden</value></data>
+  <data name="Reload" xml:space="preserve"><value>Von Datenträger neu la_den...</value></data>
+  <data name="ExternalChange" xml:space="preserve"><value>Datei außerhalb von Iseberg geändert</value></data>
+  <data name="ExternalChangeHint" xml:space="preserve"><value>{0} wurde außerhalb von Iseberg geändert oder gelöscht. Neu laden verwirft die Änderungen in dieser Registerkarte; Änderungen behalten erlaubt nicht, die Datei zu überschreiben.</value></data>
+  <data name="SaveConflictHint" xml:space="preserve"><value>{0} wurde geändert oder ist bereits vorhanden. Neu laden verwirft die Änderungen in dieser Registerkarte. Überschreiben ersetzt ausdrücklich die aktuelle Version auf dem Datenträger.</value></data>
+  <data name="ReloadFile" xml:space="preserve"><value>Neu laden</value></data>
+  <data name="KeepEdits" xml:space="preserve"><value>Änderungen behalten</value></data>
+  <data name="OverwriteFile" xml:space="preserve"><value>Überschreiben</value></data>
+  <data name="ReloadConfirm" xml:space="preserve"><value>{0} neu laden und den nicht gespeicherten Text sowie die Codierungsänderungen dieser Registerkarte verwerfen?</value></data>
+  <data name="Print" xml:space="preserve"><value>Druc_ken...</value></data>
+  <data name="PrintHint" xml:space="preserve"><value>Drucken Sie diese Momentaufnahme über die Druckschaltfläche des Browsers oder mit Strg+P. Wählen Sie einen Drucker oder Als PDF speichern. Das Skript wird dabei nicht gespeichert.</value></data>
+  <data name="PrintLaunchFailed" xml:space="preserve"><value>Die Druckvorschau konnte nicht im Browser geöffnet werden.</value></data>
+  <data name="ImportTheme" xml:space="preserve"><value>Importieren...</value></data>
+  <data name="ExportTheme" xml:space="preserve"><value>Exportieren...</value></data>
+  <data name="ThemeFile" xml:space="preserve"><value>Iseberg-Design (*.json)</value></data>
+  <data name="ThemeOverwrite" xml:space="preserve"><value>Ein benutzerdefiniertes Design mit diesem Namen ist bereits vorhanden. Ersetzen?</value></data>
+  <data name="ThemeBuiltinName" xml:space="preserve"><value>Importierte Designs können kein integriertes Design ersetzen. Ändern Sie zuerst den Namen in der Designdatei.</value></data>
+  <data name="RestoreWorkbenchFailed" xml:space="preserve"><value>Die Arbeitsumgebung konnte nicht wiederhergestellt werden</value></data>
+  <data name="RestoreDocumentFailed" xml:space="preserve"><value>Das Dokument konnte nicht wiederhergestellt werden</value></data>
+  <data name="StartupFailureTitle" xml:space="preserve"><value>Iseberg konnte nicht gestartet werden</value></data>
+  <data name="NestedPromptStatus" xml:space="preserve"><value>Geschachtelte Eingabeaufforderung - mit exit zurückkehren oder mit Beenden die Ausführung abbrechen.</value></data>
+  <data name="CommandErrorTitle" xml:space="preserve"><value>Ausführungsfehler von Show-Command</value></data>
+  <data name="UnsupportedTerminalControl" xml:space="preserve"><value>Eine nicht unterstützte Terminalsteuerung wurde ignoriert. Verwenden Sie Start-IsebergTerminal für interaktive Terminalanwendungen.</value></data>
+  <data name="NewRemoteSession" xml:space="preserve"><value>Neue _Remote-PowerShell-Registerkarte...</value></data>
+  <data name="OpenRemoteFile" xml:space="preserve"><value>Remotedatei öffnen...</value></data>
+  <data name="SaveRemoteFile" xml:space="preserve"><value>Remotedatei speichern</value></data>
+  <data name="ExitRemoteSession" xml:space="preserve"><value>Remotesitzung beenden</value></data>
+  <data name="RemoteFilePath" xml:space="preserve"><value>Geben Sie einen Dateisystempfad auf dem Remotecomputer ein.</value></data>
+  <data name="RemoteOverwrite" xml:space="preserve"><value>Dieser Pfad ist auf dem Remotecomputer bereits vorhanden. Ersetzen?</value></data>
+  <data name="RemoteTransport" xml:space="preserve"><value>Transport</value></data>
+  <data name="RemoteAddress" xml:space="preserve"><value>SSH-Hostname oder WSMan-Endpunkt-URI</value></data>
+  <data name="RemoteUser" xml:space="preserve"><value>Benutzername (optional)</value></data>
+  <data name="RemotePort" xml:space="preserve"><value>SSH-Port</value></data>
+  <data name="RemoteKey" xml:space="preserve"><value>Pfad zum privaten SSH-Schlüssel (optional, lokale Datei)</value></data>
+  <data name="RemoteSubsystem" xml:space="preserve"><value>SSH-Subsystem</value></data>
+  <data name="RemotePassword" xml:space="preserve"><value>WSMan-Kennwort</value></data>
+  <data name="RemoteConnect" xml:space="preserve"><value>Verbinden</value></data>
+  <data name="RemoteAddressRequired" xml:space="preserve"><value>Geben Sie eine Remoteadresse ein.</value></data>
+  <data name="RemotePortInvalid" xml:space="preserve"><value>Geben Sie einen SSH-Port von 1 bis 65535 ein.</value></data>
+  <data name="RemoteSubsystemRequired" xml:space="preserve"><value>Geben Sie das konfigurierte PowerShell-SSH-Subsystem ein.</value></data>
+  <data name="RemoteUriInvalid" xml:space="preserve"><value>Geben Sie einen WSMan-Endpunkt-URI mit http oder https ein, einschließlich Port und Pfad /wsman.</value></data>
+  <data name="RemoteConnectionHint" xml:space="preserve"><value>Auf dem Server muss PowerShell-Remoting aktiviert sein. SSH verwendet Ihre lokale OpenSSH-Konfiguration bzw. Schlüsselauthentifizierung; WSMan verwendet die Standardauthentifizierung. Die Hostüberprüfung bleibt aktiv. Anmeldeinformationen werden nicht gespeichert.</value></data>
+  <data name="Options" xml:space="preserve"><value>Optionen</value></data>
+  <data name="DebuggerPanes" xml:space="preserve"><value>Debuggerbereiche</value></data>
+  <data name="DebuggerPaneDivider" xml:space="preserve"><value>Trennlinie des Debuggerbereichs</value></data>
+  <data name="CloseDebuggerPanes" xml:space="preserve"><value>Debuggerbereiche schließen</value></data>
+  <data name="Variables" xml:space="preserve"><value>Variablen</value></data>
+  <data name="Watches" xml:space="preserve"><value>Überwachung</value></data>
+  <data name="CallStack" xml:space="preserve"><value>Aufrufliste</value></data>
+  <data name="BreakpointsTitle" xml:space="preserve"><value>Haltepunkte</value></data>
+  <data name="NewBreakpoint" xml:space="preserve"><value>Neuer Haltepunkt...</value></data>
+  <data name="EditBreakpoint" xml:space="preserve"><value>Bearbeiten...</value></data>
+  <data name="EnableDisableBreakpoint" xml:space="preserve"><value>Aktivieren / Deaktivieren</value></data>
+  <data name="DeleteBreakpoint" xml:space="preserve"><value>Löschen</value></data>
+  <data name="BreakAll" xml:space="preserve"><value>Alle unterbrechen</value></data>
+  <data name="AddWatch" xml:space="preserve"><value>Hinzufügen</value></data>
+  <data name="RemoveWatch" xml:space="preserve"><value>Entfernen</value></data>
+  <data name="WatchExpression" xml:space="preserve"><value>PowerShell-Ausdruck</value></data>
+  <data name="BreakpointKind" xml:space="preserve"><value>Art</value></data>
+  <data name="BreakpointScript" xml:space="preserve"><value>Skriptpfad (optional bei Befehl / Variable)</value></data>
+  <data name="BreakpointTarget" xml:space="preserve"><value>Befehls- / Variablenname</value></data>
+  <data name="BreakpointLine" xml:space="preserve"><value>Zeilennummer</value></data>
+  <data name="BreakpointCondition" xml:space="preserve"><value>Bedingung (PowerShell-Ausdruck; leer bedeutet immer anhalten)</value></data>
+  <data name="BreakpointAction" xml:space="preserve"><value>Aktion (optional; break hält an; nicht mit einer Bedingung kombinierbar)</value></data>
+  <data name="BreakpointAccess" xml:space="preserve"><value>Variablenzugriff</value></data>
+  <data name="BreakpointEnabled" xml:space="preserve"><value>Aktiviert</value></data>
+  <data name="ColorsAndFonts" xml:space="preserve"><value>Farben und Schriftarten</value></data>
+  <data name="GeneralSettings" xml:space="preserve"><value>Allgemeine Einstellungen</value></data>
+  <data name="ScriptPane" xml:space="preserve"><value>Skriptbereich</value></data>
+  <data name="ConsolePane" xml:space="preserve"><value>Konsolenbereich</value></data>
+  <data name="Foreground" xml:space="preserve"><value>Vordergrund</value></data>
+  <data name="Background" xml:space="preserve"><value>Hintergrund</value></data>
+  <data name="TextBackground" xml:space="preserve"><value>Texthintergrund</value></data>
+  <data name="ScriptTokens" xml:space="preserve"><value>Token im Skriptbereich</value></data>
+  <data name="ConsoleTokens" xml:space="preserve"><value>Konsolentoken</value></data>
+  <data name="XmlTokens" xml:space="preserve"><value>XML-Token</value></data>
+  <data name="OutputStreams" xml:space="preserve"><value>Ausgabestreams</value></data>
+  <data name="Comment" xml:space="preserve"><value>Kommentar</value></data>
+  <data name="Keyword" xml:space="preserve"><value>Schlüsselwort</value></data>
+  <data name="String" xml:space="preserve"><value>Zeichenfolge</value></data>
+  <data name="Variable" xml:space="preserve"><value>Variable</value></data>
+  <data name="Number" xml:space="preserve"><value>Zahl</value></data>
+  <data name="Command" xml:space="preserve"><value>Befehl</value></data>
+  <data name="Parameter" xml:space="preserve"><value>Parameter</value></data>
+  <data name="Type" xml:space="preserve"><value>Typ</value></data>
+  <data name="Operator" xml:space="preserve"><value>Operator</value></data>
+  <data name="Member" xml:space="preserve"><value>Member</value></data>
+  <data name="Function" xml:space="preserve"><value>Funktion</value></data>
+  <data name="CommandArgument" xml:space="preserve"><value>Befehlsargument</value></data>
+  <data name="Label" xml:space="preserve"><value>Schleifenbezeichnung</value></data>
+  <data name="Tag" xml:space="preserve"><value>Tag</value></data>
+  <data name="Attribute" xml:space="preserve"><value>Attribut</value></data>
+  <data name="Value" xml:space="preserve"><value>Wert</value></data>
+  <data name="Error" xml:space="preserve"><value>Fehler</value></data>
+  <data name="Warning" xml:space="preserve"><value>Warnung</value></data>
+  <data name="Verbose" xml:space="preserve"><value>Ausführlich</value></data>
+  <data name="Debug" xml:space="preserve"><value>Debug</value></data>
+  <data name="Red" xml:space="preserve"><value>Rot</value></data>
+  <data name="Green" xml:space="preserve"><value>Grün</value></data>
+  <data name="Blue" xml:space="preserve"><value>Blau</value></data>
+  <data name="Hexadecimal" xml:space="preserve"><value>Hexadezimal</value></data>
+  <data name="FontFamily" xml:space="preserve"><value>Schriftart:</value></data>
+  <data name="FontSize" xml:space="preserve"><value>Schriftgrad:</value></data>
+  <data name="FixedWidthOnly" xml:space="preserve"><value>Nur feste Breite</value></data>
+  <data name="CurrentTheme" xml:space="preserve"><value>Aktuelles Design:</value></data>
+  <data name="ManageThemes" xml:space="preserve"><value>Designs...</value></data>
+  <data name="Sample" xml:space="preserve"><value>Beispiel:</value></data>
+  <data name="ScriptBehavior" xml:space="preserve"><value>Verhalten des Skriptbereichs</value></data>
+  <data name="ShowOutlining" xml:space="preserve"><value>Gliederung im Skriptbereich anzeigen</value></data>
+  <data name="ShowLineNumbers" xml:space="preserve"><value>Zeilennummern im Skriptbereich anzeigen</value></data>
+  <data name="WarnDuplicates" xml:space="preserve"><value>Beim Bearbeiten doppelt geöffneter Dateien warnen</value></data>
+  <data name="PromptToSave" xml:space="preserve"><value>Vor dem Ausführen von Skripts zum Speichern auffordern</value></data>
+  <data name="PanePosition" xml:space="preserve"><value>Skriptposition:</value></data>
+  <data name="Top" xml:space="preserve"><value>Oben</value></data>
+  <data name="Right" xml:space="preserve"><value>Rechts</value></data>
+  <data name="Maximized" xml:space="preserve"><value>Maximiert</value></data>
+  <data name="IntelliSense" xml:space="preserve"><value>IntelliSense</value></data>
+  <data name="ConsoleIntelliSense" xml:space="preserve"><value>IntelliSense im Konsolenbereich anzeigen</value></data>
+  <data name="ConsoleEnterSelects" xml:space="preserve"><value>Eingabetaste wählt IntelliSense-Elemente im Konsolenbereich aus</value></data>
+  <data name="ScriptIntelliSense" xml:space="preserve"><value>IntelliSense im Skriptbereich anzeigen</value></data>
+  <data name="ScriptEnterSelects" xml:space="preserve"><value>Eingabetaste wählt IntelliSense-Elemente im Skriptbereich aus</value></data>
+  <data name="CompletionTimeout" xml:space="preserve"><value>IntelliSense-Timeout (s):</value></data>
+  <data name="OtherSettings" xml:space="preserve"><value>Weitere Einstellungen</value></data>
+  <data name="LocalHelp" xml:space="preserve"><value>Lokale statt Onlinehilfe verwenden</value></data>
+  <data name="ShowToolbar" xml:space="preserve"><value>Symbolleiste anzeigen</value></data>
+  <data name="DefaultSnippets" xml:space="preserve"><value>Standardsnippets verwenden</value></data>
+  <data name="AutoSaveInterval" xml:space="preserve"><value>AutoSpeichern-Intervall (Minuten):</value></data>
+  <data name="RecentFileCount" xml:space="preserve"><value>Zuletzt verwendete Dateien:</value></data>
+  <data name="RestoreDefaults" xml:space="preserve"><value>Standardwerte</value></data>
+  <data name="OK" xml:space="preserve"><value>OK</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Abbrechen</value></data>
+  <data name="Apply" xml:space="preserve"><value>Übernehmen</value></data>
+  <data name="InvalidColor" xml:space="preserve"><value>Geben Sie RGB-Werte von 0 bis 255 ein (00 bis FF hexadezimal).</value></data>
+  <data name="InvalidSettings" xml:space="preserve"><value>AutoSpeichern muss 0-120 Minuten betragen; zuletzt verwendete Dateien 0-100. Null deaktiviert die Funktion.</value></data>
+  <data name="ThemeName" xml:space="preserve"><value>Designname:</value></data>
+  <data name="SaveTheme" xml:space="preserve"><value>Aktuelles Design speichern...</value></data>
+  <data name="DeleteTheme" xml:space="preserve"><value>Ausgewähltes Design löschen</value></data>
+  <data name="DefaultTheme" xml:space="preserve"><value>Dunkle Konsole, heller Editor (Standard)</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Helle Konsole, heller Editor</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>Dunkle Konsole, dunkler Editor</value></data>
+  <data name="CustomTheme" xml:space="preserve"><value>Benutzerdefiniert</value></data>
+  <data name="FileMenu" xml:space="preserve"><value>_Datei</value></data>
+  <data name="EditMenu" xml:space="preserve"><value>_Bearbeiten</value></data>
+  <data name="ViewMenu" xml:space="preserve"><value>_Ansicht</value></data>
+  <data name="ToolsMenu" xml:space="preserve"><value>E_xtras</value></data>
+  <data name="DebugMenu" xml:space="preserve"><value>Deb_uggen</value></data>
+  <data name="AddonsMenu" xml:space="preserve"><value>Add-_Ons</value></data>
+  <data name="HelpMenu" xml:space="preserve"><value>_Hilfe</value></data>
+  <data name="New" xml:space="preserve"><value>_Neu</value></data>
+  <data name="Open" xml:space="preserve"><value>Ö_ffnen...</value></data>
+  <data name="Save" xml:space="preserve"><value>_Speichern</value></data>
+  <data name="SaveAs" xml:space="preserve"><value>Speichern _unter...</value></data>
+  <data name="SaveAll" xml:space="preserve"><value>A_lle speichern</value></data>
+  <data name="Close" xml:space="preserve"><value>Schl_ießen</value></data>
+  <data name="RecentFiles" xml:space="preserve"><value>_Zuletzt verwendete Dateien</value></data>
+  <data name="NewSession" xml:space="preserve"><value>Neue _PowerShell-Registerkarte</value></data>
+  <data name="CloseSession" xml:space="preserve"><value>PowerShell-Registerkarte schließen</value></data>
+  <data name="Exit" xml:space="preserve"><value>_Beenden</value></data>
+  <data name="Undo" xml:space="preserve"><value>_Rückgängig</value></data>
+  <data name="Redo" xml:space="preserve"><value>_Wiederholen</value></data>
+  <data name="Cut" xml:space="preserve"><value>_Ausschneiden</value></data>
+  <data name="Copy" xml:space="preserve"><value>_Kopieren</value></data>
+  <data name="Paste" xml:space="preserve"><value>_Einfügen</value></data>
+  <data name="SelectAll" xml:space="preserve"><value>Alles _markieren</value></data>
+  <data name="Find" xml:space="preserve"><value>_Suchen...</value></data>
+  <data name="Replace" xml:space="preserve"><value>Erse_tzen...</value></data>
+  <data name="GoToLine" xml:space="preserve"><value>_Gehe zu Zeile...</value></data>
+  <data name="MatchBrace" xml:space="preserve"><value>Zur zugehörigen K_lammer wechseln</value></data>
+  <data name="SelectBrace" xml:space="preserve"><value>Bis zur zugehörigen Klammer markieren</value></data>
+  <data name="NoMatchingBrace" xml:space="preserve"><value>An der Einfügemarke gibt es keine zugehörige Klammer.</value></data>
+  <data name="CompletionTimedOut" xml:space="preserve"><value>Zeitüberschreitung bei IntelliSense.</value></data>
+  <data name="FindWhat" xml:space="preserve"><value>Suchen nach:</value></data>
+  <data name="ReplaceWith" xml:space="preserve"><value>Ersetzen durch:</value></data>
+  <data name="MatchCase" xml:space="preserve"><value>Groß-/Kleinschreibung beachten</value></data>
+  <data name="WholeWord" xml:space="preserve"><value>Nur ganzes Wort suchen</value></data>
+  <data name="RegularExpression" xml:space="preserve"><value>Reguläre Ausdrücke verwenden</value></data>
+  <data name="SearchUp" xml:space="preserve"><value>Nach oben suchen</value></data>
+  <data name="WrapAround" xml:space="preserve"><value>Am Ende von vorn beginnen</value></data>
+  <data name="SelectionOnly" xml:space="preserve"><value>Nur in Auswahl</value></data>
+  <data name="FindNext" xml:space="preserve"><value>Weitersuchen</value></data>
+  <data name="ReplaceNext" xml:space="preserve"><value>Ersetzen</value></data>
+  <data name="ReplaceAll" xml:space="preserve"><value>Alle ersetzen</value></data>
+  <data name="NoMatch" xml:space="preserve"><value>Keine Übereinstimmung gefunden.</value></data>
+  <data name="MatchFound" xml:space="preserve"><value>Übereinstimmung gefunden.</value></data>
+  <data name="ReplacementCount" xml:space="preserve"><value>{0} Vorkommen ersetzt.</value></data>
+  <data name="ReadOnlyReplace" xml:space="preserve"><value>Der Skript-Editor ist schreibgeschützt.</value></data>
+  <data name="CreateSnippet" xml:space="preserve"><value>Snippet erstellen...</value></data>
+  <data name="ImportSnippets" xml:space="preserve"><value>Snippets importieren...</value></data>
+  <data name="ExportSnippets" xml:space="preserve"><value>Snippets exportieren...</value></data>
+  <data name="SearchSnippets" xml:space="preserve"><value>Snippets durchsuchen</value></data>
+  <data name="SnippetPreview" xml:space="preserve"><value>Snippetvorschau</value></data>
+  <data name="SnippetLoadError" xml:space="preserve"><value>Snippets konnten nicht geladen werden</value></data>
+  <data name="SelectSnippetCode" xml:space="preserve"><value>Markieren Sie Skripttext, um ein benutzerdefiniertes Snippet zu erstellen.</value></data>
+  <data name="SnippetTitle" xml:space="preserve"><value>Titel:</value></data>
+  <data name="SnippetTitleRequired" xml:space="preserve"><value>Ein Snippettitel ist erforderlich.</value></data>
+  <data name="SnippetDescription" xml:space="preserve"><value>Beschreibung:</value></data>
+  <data name="SnippetAuthor" xml:space="preserve"><value>Autor:</value></data>
+  <data name="SnippetSaved" xml:space="preserve"><value>Benutzerdefiniertes Snippet gespeichert.</value></data>
+  <data name="SnippetsImported" xml:space="preserve"><value>{0} benutzerdefinierte(s) Snippet(s) importiert.</value></data>
+  <data name="NoCustomSnippets" xml:space="preserve"><value>Es gibt keine benutzerdefinierten Snippets zum Exportieren.</value></data>
+  <data name="PaneTop" xml:space="preserve"><value>Skriptbereich _oben anzeigen</value></data>
+  <data name="PaneRight" xml:space="preserve"><value>Skriptbereich _rechts anzeigen</value></data>
+  <data name="PaneMaximized" xml:space="preserve"><value>Skriptbereich _maximiert anzeigen</value></data>
+  <data name="Commands" xml:space="preserve"><value>_Befehlsbereich anzeigen</value></data>
+  <data name="LineNumbers" xml:space="preserve"><value>_Zeilennummern anzeigen</value></data>
+  <data name="WordWrap" xml:space="preserve"><value>Zeilen_umbruch</value></data>
+  <data name="Fold" xml:space="preserve"><value>Gliederung erweitern / reduzieren</value></data>
+  <data name="FocusScript" xml:space="preserve"><value>Zum _Skriptbereich wechseln</value></data>
+  <data name="FocusConsole" xml:space="preserve"><value>Zum _Konsolenbereich wechseln</value></data>
+  <data name="ZoomIn" xml:space="preserve"><value>_Vergrößern</value></data>
+  <data name="ZoomOut" xml:space="preserve"><value>Verkl_einern</value></data>
+  <data name="Run" xml:space="preserve"><value>Skript _ausführen</value></data>
+  <data name="RunSelection" xml:space="preserve"><value>Aus_wahl ausführen</value></data>
+  <data name="Stop" xml:space="preserve"><value>Vorgang _beenden</value></data>
+  <data name="Complete" xml:space="preserve"><value>_IntelliSense starten</value></data>
+  <data name="Snippets" xml:space="preserve"><value>_Snippets...</value></data>
+  <data name="Clear" xml:space="preserve"><value>_Konsolenbereich löschen</value></data>
+  <data name="Profiles" xml:space="preserve"><value>PowerShell-_Profile laden</value></data>
+  <data name="AutoProfiles" xml:space="preserve"><value>Profile in neuen PowerShell-Registerkarten laden</value></data>
+  <data name="ExecutionPolicy" xml:space="preserve"><value>Lokale Skripts aktivieren (nur dieser Prozess)...</value></data>
+  <data name="OptionsMenu" xml:space="preserve"><value>_Optionen...</value></data>
+  <data name="Breakpoint" xml:space="preserve"><value>_Haltepunkt umschalten</value></data>
+  <data name="BreakpointGutter" xml:space="preserve"><value>Haltepunktleiste</value></data>
+  <data name="BreakpointGutterHint" xml:space="preserve"><value>Klicken Sie neben eine Zeile, um deren Haltepunkt umzuschalten.</value></data>
+  <data name="RemoveBreakpoints" xml:space="preserve"><value>Alle Haltepunkte _entfernen</value></data>
+  <data name="StepInto" xml:space="preserve"><value>Einzel_schritt</value></data>
+  <data name="StepOver" xml:space="preserve"><value>_Prozedurschritt</value></data>
+  <data name="StepOut" xml:space="preserve"><value>_Rücksprung</value></data>
+  <data name="Continue" xml:space="preserve"><value>_Fortsetzen</value></data>
+  <data name="Help" xml:space="preserve"><value>PowerShell-Befehls_hilfe</value></data>
+  <data name="About" xml:space="preserve"><value>_Info zu Iseberg</value></data>
+  <data name="CloseScript" xml:space="preserve"><value>Skript schließen</value></data>
+  <data name="ClosePowerShellTab" xml:space="preserve"><value>PowerShell-Registerkarte schließen</value></data>
+  <data name="CommandsTitle" xml:space="preserve"><value>Befehle</value></data>
+  <data name="ShowCommand" xml:space="preserve"><value>Befehl an_zeigen...</value></data>
+  <data name="CommandFormDivider" xml:space="preserve"><value>Trennlinie zwischen Befehlsliste und Parameterformular</value></data>
+  <data name="ParameterSet" xml:space="preserve"><value>Parametersatz:</value></data>
+  <data name="CommandName" xml:space="preserve"><value>Befehlsname:</value></data>
+  <data name="CommandParametersTitle" xml:space="preserve"><value>Parameter für "{0}":</value></data>
+  <data name="DefaultParameterSet" xml:space="preserve"><value>Standard</value></data>
+  <data name="ParameterOptions" xml:space="preserve"><value>Parameteroptionen...</value></data>
+  <data name="ParameterOptionsHint" xml:space="preserve"><value>Rechtsklick für Optionen zu Einbeziehung und Ausdrücken.</value></data>
+  <data name="CommandHelpTitle" xml:space="preserve"><value>Hilfe zu {0}</value></data>
+  <data name="HelpSettings" xml:space="preserve"><value>Einstellungen</value></data>
+  <data name="HelpSections" xml:space="preserve"><value>Hilfeabschnitte</value></data>
+  <data name="HelpSearchOptions" xml:space="preserve"><value>Suchoptionen</value></data>
+  <data name="HelpMatchCase" xml:space="preserve"><value>Groß-/Kleinschreibung</value></data>
+  <data name="HelpWholeWord" xml:space="preserve"><value>Ganzes Wort</value></data>
+  <data name="HelpSynopsis" xml:space="preserve"><value>Übersicht</value></data>
+  <data name="HelpSyntax" xml:space="preserve"><value>Syntax</value></data>
+  <data name="HelpDescription" xml:space="preserve"><value>Beschreibung</value></data>
+  <data name="HelpParameters" xml:space="preserve"><value>Parameter</value></data>
+  <data name="HelpInputs" xml:space="preserve"><value>Eingaben</value></data>
+  <data name="HelpOutputs" xml:space="preserve"><value>Ausgaben</value></data>
+  <data name="HelpNotes" xml:space="preserve"><value>Hinweise</value></data>
+  <data name="HelpExamples" xml:space="preserve"><value>Beispiele</value></data>
+  <data name="HelpRelatedLinks" xml:space="preserve"><value>Verwandte Links</value></data>
+  <data name="HelpRemarks" xml:space="preserve"><value>Anmerkungen</value></data>
+  <data name="HelpFind" xml:space="preserve"><value>Suchen</value></data>
+  <data name="HelpPrevious" xml:space="preserve"><value>Zurück</value></data>
+  <data name="HelpNext" xml:space="preserve"><value>Weiter</value></data>
+  <data name="HelpContent" xml:space="preserve"><value>Befehlshilfe</value></data>
+  <data name="HelpZoom" xml:space="preserve"><value>Hilfezoom in Prozent</value></data>
+  <data name="HelpMatchCount" xml:space="preserve"><value>Treffer {0} von {1}</value></data>
+  <data name="HelpSearchTimedOut" xml:space="preserve"><value>Zeitüberschreitung bei der Hilfesuche.</value></data>
+  <data name="HelpSettingsSaveFailed" xml:space="preserve"><value>Die Hilfeeinstellungen konnten nicht gespeichert werden</value></data>
+  <data name="HelpDocumentUnavailable" xml:space="preserve"><value>Das Hilfedokument zum Befehl ist nicht verfügbar.</value></data>
+  <data name="CommandSearch" xml:space="preserve"><value>Befehlssuche</value></data>
+  <data name="AllModules" xml:space="preserve"><value>Alle Module</value></data>
+  <data name="CommandPreview" xml:space="preserve"><value>Befehlsvorschau</value></data>
+  <data name="SelectCommand" xml:space="preserve"><value>Wählen Sie einen Befehl aus, um dessen Parameter einzugeben.</value></data>
+  <data name="LoadingCommand" xml:space="preserve"><value>Befehlsparameter werden geladen...</value></data>
+  <data name="CommandFormFailed" xml:space="preserve"><value>Die Befehlsparameter konnten nicht geladen werden</value></data>
+  <data name="CommonParameters" xml:space="preserve"><value>Allgemeine Parameter</value></data>
+  <data name="NoCommandParameters" xml:space="preserve"><value>Dieser Befehl hat keine deklarierten Parameter.</value></data>
+  <data name="IncludeParameter" xml:space="preserve"><value>Parameter einbeziehen</value></data>
+  <data name="RequiredParameter" xml:space="preserve"><value>Erforderlich</value></data>
+  <data name="PowerShellExpression" xml:space="preserve"><value>PowerShell-Ausdruck verwenden</value></data>
+  <data name="ParameterValueHint" xml:space="preserve"><value>Werte sind wörtlicher Text. Aktivieren Sie den Ausdrucksmodus für Variablen, Skriptblöcke oder andere PowerShell-Ausdrücke.</value></data>
+  <data name="ArrayParameterHint" xml:space="preserve"><value>Ein wörtlicher Wert pro Zeile. Aktivieren Sie den Ausdrucksmodus, um ein PowerShell-Array oder eine Variable einzugeben.</value></data>
+  <data name="ParameterPosition" xml:space="preserve"><value>Position {0}</value></data>
+  <data name="PipelineInput" xml:space="preserve"><value>Akzeptiert Pipelineeingaben</value></data>
+  <data name="ParameterAliases" xml:space="preserve"><value>Aliase:</value></data>
+  <data name="MissingParameters" xml:space="preserve"><value>Erforderliche Parameter: {0}</value></data>
+  <data name="InvalidParameterExpressions" xml:space="preserve"><value>Ungültige PowerShell-Ausdrücke: {0}</value></data>
+  <data name="InvalidParameterChoices" xml:space="preserve"><value>Wählen Sie einen zulässigen Wert für: {0}</value></data>
+  <data name="CopyCommand" xml:space="preserve"><value>Kopieren</value></data>
+  <data name="CommandCopied" xml:space="preserve"><value>Befehl kopiert.</value></data>
+  <data name="ClipboardUnavailable" xml:space="preserve"><value>Die Zwischenablage ist nicht verfügbar.</value></data>
+  <data name="Modules" xml:space="preserve"><value>Module:</value></data>
+  <data name="Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Refresh" xml:space="preserve"><value>Aktualisieren</value></data>
+  <data name="HelpButton" xml:space="preserve"><value>Hilfe</value></data>
+  <data name="Insert" xml:space="preserve"><value>Einfügen</value></data>
+  <data name="RunButton" xml:space="preserve"><value>Ausführen</value></data>
+  <data name="Ready" xml:space="preserve"><value>Bereit</value></data>
+  <data name="Starting" xml:space="preserve"><value>PowerShell wird gestartet...</value></data>
+  <data name="Running" xml:space="preserve"><value>Skript / Auswahl wird ausgeführt. Strg+Untbr zum Beenden.</value></data>
+  <data name="SessionClosed" xml:space="preserve"><value>Sitzung geschlossen</value></data>
+  <data name="Caret" xml:space="preserve"><value>Ze {0}  Sp {1}</value></data>
+  <data name="DebugStatus" xml:space="preserve"><value>Haltepunkt in Zeile {0}. F5: Fortsetzen  F10: Prozedurschritt  F11: Einzelschritt</value></data>
+  <data name="DebuggerEvaluationScope" xml:space="preserve"><value>Auswertung und Überwachung: angehaltener Frame</value></data>
+  <data name="DebuggerInspectionScope" xml:space="preserve"><value>Variablen: {0}. Auswertung und Überwachung: angehaltener Frame</value></data>
+  <data name="ExpandDebuggerValue" xml:space="preserve"><value>Zum Untersuchen erweitern</value></data>
+  <data name="LoadingDebuggerValue" xml:space="preserve"><value>Wird geladen...</value></data>
+  <data name="MoreDebuggerValues" xml:space="preserve"><value>Mehr laden...</value></data>
+  <data name="PauseForBreakpointEdit" xml:space="preserve"><value>Es wird auf die nächste PowerShell-Anweisung gewartet, um vor dem Bearbeiten der Haltepunkte anzuhalten...</value></data>
+  <data name="Language" xml:space="preserve"><value>Sprache:</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>Systemstandard</value></data>
+  <data name="LanguageRestartHint" xml:space="preserve"><value>Wirkt nach Neustart von Iseberg.</value></data>
+  <data name="ScriptEditorName" xml:space="preserve"><value>Skript-Editor</value></data>
+  <data name="ScriptDiagnostics" xml:space="preserve"><value>Skriptdiagnose</value></data>
+  <data name="PaneDivider" xml:space="preserve"><value>Trennlinie zwischen Skript- und Konsolenbereich</value></data>
+  <data name="ConsoleName" xml:space="preserve"><value>PowerShell-Konsole</value></data>
+  <data name="CommandsPaneDivider" xml:space="preserve"><value>Trennlinie des Befehlsbereichs</value></data>
+  <data name="ZoomPercentage" xml:space="preserve"><value>Zoom in Prozent</value></data>
+  <data name="SessionInitFailed" xml:space="preserve"><value>Die Sitzung konnte nicht initialisiert werden: {0}</value></data>
+  <data name="ExecutionPolicyTitle" xml:space="preserve"><value>Ausführungsrichtlinie</value></data>
+  <data name="ExecutionPolicyPrompt" xml:space="preserve"><value>RemoteSigned für diesen Anwendungsprozess festlegen? Lokale Skripts können dann ausgeführt werden; heruntergeladene Skripts benötigen weiterhin eine vertrauenswürdige Signatur. Computer- und Benutzereinstellungen werden nicht geändert, und Gruppenrichtlinien gelten weiterhin.</value></data>
+  <data name="Enable" xml:space="preserve"><value>Aktivieren</value></data>
+  <data name="AboutTitle" xml:space="preserve"><value>Info zu Iseberg</value></data>
+  <data name="AboutText" xml:space="preserve"><value>Iseberg {0}
+Ein plattformübergreifender Editor mit Terminal im Stil der PowerShell ISE.
+
+PowerShell {1}
+Avalonia + AvaloniaEdit + PowerShell SDK
+
+Den Funktionsumfang beschreibt die README.md, offene Arbeiten stehen in den GitHub-Issues.</value></data>
+  <data name="DuplicateFileTitle" xml:space="preserve"><value>Datei bereits geöffnet</value></data>
+  <data name="DuplicateFilePrompt" xml:space="preserve"><value>Dieses Skript ist bereits in einer anderen PowerShell-Registerkarte geöffnet. Eine weitere bearbeitbare Kopie öffnen?</value></data>
+  <data name="OpenChoice" xml:space="preserve"><value>Öffnen</value></data>
+  <data name="SaveChangesTitle" xml:space="preserve"><value>Änderungen speichern</value></data>
+  <data name="SaveChangesPrompt" xml:space="preserve"><value>Änderungen an {0} speichern?</value></data>
+  <data name="SaveChoice" xml:space="preserve"><value>Speichern</value></data>
+  <data name="DontSave" xml:space="preserve"><value>Nicht speichern</value></data>
+  <data name="StopExecutionTitle" xml:space="preserve"><value>Ausführung beenden</value></data>
+  <data name="StopAndCloseTab" xml:space="preserve"><value>Den laufenden Befehl beenden und diese PowerShell-Registerkarte schließen?</value></data>
+  <data name="StopAndCloseWorkbench" xml:space="preserve"><value>Den laufenden Befehl beenden und diese Arbeitsumgebung schließen?</value></data>
+  <data name="StopChoice" xml:space="preserve"><value>Beenden</value></data>
+  <data name="SaveBeforeRunTitle" xml:space="preserve"><value>Vor dem Ausführen speichern</value></data>
+  <data name="SaveBeforeRunPrompt" xml:space="preserve"><value>{0} vor dem Ausführen speichern?</value></data>
+  <data name="RunWithoutSaving" xml:space="preserve"><value>Ohne Speichern ausführen</value></data>
+  <data name="RecoverTitle" xml:space="preserve"><value>Skripts wiederherstellen</value></data>
+  <data name="RecoverPrompt" xml:space="preserve"><value>{0} automatisch gespeicherte(s) Skript(s) aus einer früheren Sitzung wiederherstellen?</value></data>
+  <data name="Recover" xml:space="preserve"><value>Wiederherstellen</value></data>
+  <data name="Discard" xml:space="preserve"><value>Verwerfen</value></data>
+  <data name="GoToLineTitle" xml:space="preserve"><value>Gehe zu Zeile</value></data>
+  <data name="GoToLinePrompt" xml:space="preserve"><value>Zeilennummer (1 - {0}):</value></data>
+  <data name="SettingsLoadFailed" xml:space="preserve"><value>Die Einstellungen konnten nicht geladen werden</value></data>
+  <data name="PowerShellInitFailed" xml:space="preserve"><value>PowerShell konnte nicht initialisiert werden</value></data>
+  <data name="OperationFailed" xml:space="preserve"><value>Vorgang fehlgeschlagen</value></data>
+  <data name="OpenScriptTitle" xml:space="preserve"><value>Skript öffnen</value></data>
+  <data name="SaveScriptTitle" xml:space="preserve"><value>Skript speichern</value></data>
+  <data name="ScriptFilesFilter" xml:space="preserve"><value>PowerShell-Skripts</value></data>
+  <data name="ScriptFileFilter" xml:space="preserve"><value>PowerShell-Skript</value></data>
+  <data name="SnippetFilesFilter" xml:space="preserve"><value>PowerShell-Snippets</value></data>
+  <data name="LocalScriptOnly" xml:space="preserve"><value>Es werden nur lokale Skriptdateien unterstützt.</value></data>
+  <data name="LocalSnippetOnly" xml:space="preserve"><value>Es werden nur lokale Snippetdateien unterstützt.</value></data>
+  <data name="LocalThemeOnly" xml:space="preserve"><value>Es werden nur lokale Designdateien unterstützt.</value></data>
+  <data name="ThemeNameInvalid" xml:space="preserve"><value>Geben Sie einen Namen ein, der nicht leer ist und keinem integrierten Design entspricht.</value></data>
+  <data name="EditedWhileSaving" xml:space="preserve"><value>Das Dokument wurde während des Speicherns bearbeitet. Das Schließen wurde abgebrochen, damit diese Änderungen erhalten bleiben.</value></data>
+  <data name="StopBeforeClose" xml:space="preserve"><value>Beenden Sie die Ausführung, bevor Sie ein Skript schließen.</value></data>
+  <data name="ReopenRemoteBeforeRun" xml:space="preserve"><value>Öffnen Sie dieses Skript erneut in seiner Remoteverbindung, bevor Sie es ausführen.</value></data>
+  <data name="RemoteRunNeedsRemoteFile" xml:space="preserve"><value>Öffnen oder speichern Sie das Skript auf dem Remotecomputer, bevor Sie ein benanntes Skript ausführen. Mit F8 lässt sich lokaler Text remote ausführen.</value></data>
+  <data name="SaveToRunWithBreakpoints" xml:space="preserve"><value>Speichern Sie dieses Skript, um es mit Haltepunkten auszuführen.</value></data>
+  <data name="OnlineHelpOpenFailed" xml:space="preserve"><value>Das System konnte die URL der Onlinehilfe nicht öffnen.</value></data>
+  <data name="NoOnlineHelp" xml:space="preserve"><value>Für diesen Befehl ist keine URL zur Onlinehilfe hinterlegt. Aktivieren Sie die lokale Hilfe in den Optionen.</value></data>
+  <data name="ReplaceWhileDebugging" xml:space="preserve"><value>Setzen Sie das Debuggen fort oder beenden Sie es, bevor Sie Skripttext ersetzen.</value></data>
+  <data name="InvalidLineNumber" xml:space="preserve"><value>Geben Sie eine gültige Zeilennummer ein.</value></data>
+  <data name="BreakpointWrongRunspace" xml:space="preserve"><value>Diese Datei gehört nicht zum aktiven Runspace. Öffnen Sie die Remotekopie, bevor Sie Haltepunkte setzen.</value></data>
+  <data name="SelectBreakpointToEdit" xml:space="preserve"><value>Wählen Sie einen Haltepunkt zum Bearbeiten aus.</value></data>
+  <data name="WaitForDebuggerEvaluation" xml:space="preserve"><value>Warten Sie, bis die Auswertung im Debugger abgeschlossen ist, bevor Sie Haltepunkte bearbeiten.</value></data>
+  <data name="BreakpointEditPending" xml:space="preserve"><value>Eine Haltepunktbearbeitung wartet bereits darauf, dass die Ausführung anhält.</value></data>
+  <data name="StopBeforeReload" xml:space="preserve"><value>Beenden Sie die Ausführung, bevor Sie ein Skript neu laden.</value></data>
+  <data name="SaveBeforeReload" xml:space="preserve"><value>Speichern Sie das Skript, bevor Sie es neu laden.</value></data>
+  <data name="ReopenRemoteDocument" xml:space="preserve"><value>Öffnen Sie das Remotedokument erneut in der zugehörigen Verbindung.</value></data>
+  <data name="EditedWhileReading" xml:space="preserve"><value>Das Dokument wurde während des Lesens der Datei bearbeitet. Das Neuladen wurde abgebrochen.</value></data>
+  <data name="ReopenRemoteBeforeSave" xml:space="preserve"><value>Öffnen Sie das Remotedokument vor dem Speichern erneut in der zugehörigen Verbindung.</value></data>
+  <data name="SelectPowerShellTab" xml:space="preserve"><value>Wählen Sie eine PowerShell-Registerkarte aus.</value></data>
+  <data name="SelectBreakpointKind" xml:space="preserve"><value>Wählen Sie eine Haltepunktart aus.</value></data>
+  <data name="PositiveLineNumber" xml:space="preserve"><value>Geben Sie eine positive Zeilennummer ein.</value></data>
+  <data name="AllModulesFilter" xml:space="preserve"><value>Alle</value></data>
+</root>

@@ -169,7 +169,7 @@ public sealed partial class WorkbenchControl
             {
                 if (session.Engine.State is SessionState.Running or SessionState.Debugging or SessionState.NestedPrompt)
                 {
-                    if (await Dialogs.ChooseAsync(HostWindow, "Stop execution", "Stop the running command and close this workbench?", "Stop", "Cancel") != "Stop")
+                    if (await Dialogs.ChooseAsync(HostWindow, UiText.Get("StopExecutionTitle"), UiText.Get("StopAndCloseWorkbench"), UiText.Get("StopChoice"), UiText.Get("Cancel")) != UiText.Get("StopChoice"))
                         return false;
                     await session.Engine.StopAsync();
                 }

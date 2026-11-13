@@ -12,6 +12,7 @@ internal static class Program
     public static int Main(string[] args)
     {
         var checkRuntime = args is ["--check-runtime"];
+        UiLanguage.ApplyFromSettings(Iseberg.Core.UserSettings.SettingsPath);
         try
         {
 #if ISEBERG_COMPACT

@@ -84,9 +84,9 @@ public sealed class BreakpointWindow : Window
 
     public BreakpointSpec ReadSpec()
     {
-        var breakpointKind = kind.SelectedItem is BreakpointKind value ? value : throw new ArgumentException("Select a breakpoint kind.");
+        var breakpointKind = kind.SelectedItem is BreakpointKind value ? value : throw new ArgumentException(UiText.Get("SelectBreakpointKind"));
         if (breakpointKind == BreakpointKind.Line && (!int.TryParse(line.Text, out var number) || number < 1))
-            throw new ArgumentException("Enter a positive line number.");
+            throw new ArgumentException(UiText.Get("PositiveLineNumber"));
         return new(breakpointKind, string.IsNullOrWhiteSpace(script.Text) ? null : Path.GetFullPath(script.Text.Trim()),
             target.Text?.Trim() ?? "", breakpointKind == BreakpointKind.Line ? int.Parse(line.Text!) : 0,
             condition.Text ?? "", enabled.IsChecked == true,

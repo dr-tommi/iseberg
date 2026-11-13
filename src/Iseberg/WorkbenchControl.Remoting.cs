@@ -23,7 +23,7 @@ public sealed partial class WorkbenchControl
     {
         VerifyAvailable();
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
-        var session = Workbench.SelectedSession ?? throw new InvalidOperationException("Select a PowerShell tab.");
+        var session = Workbench.SelectedSession ?? throw new InvalidOperationException(UiText.Get("SelectPowerShellTab"));
         var existing = session.Files.FirstOrDefault(tab => tab.File.RemoteRunspaceId == session.Engine.RunspaceId &&
             string.Equals(tab.File.Path, path, StringComparison.Ordinal));
         if (existing is null)

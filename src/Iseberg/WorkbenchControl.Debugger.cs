@@ -203,7 +203,7 @@ public sealed partial class WorkbenchControl
         {
             if (file.File.Path is not null)
             {
-                if (!FileInCurrentRunspace(session, file)) throw new InvalidOperationException("This file is not in the active runspace. Open the remote copy before setting breakpoints.");
+                if (!FileInCurrentRunspace(session, file)) throw new InvalidOperationException(UiText.Get("BreakpointWrongRunspace"));
                 await session.Engine.SetLineBreakpointsAsync(file.File.Path, file.LineBreakpoints);
                 file.AcknowledgeBreakpointLines();
                 await RefreshDebuggerAsync(session, reconcile: true);
@@ -222,7 +222,7 @@ public sealed partial class WorkbenchControl
     private async Task EditBreakpointAsync(SessionModel session, bool create)
     {
         var selected = create ? null : BreakpointsList.SelectedItem as DebugBreakpoint;
-        if (!create && selected is null) throw new InvalidOperationException("Select a breakpoint to edit.");
+        if (!create && selected is null) throw new InvalidOperationException(UiText.Get("SelectBreakpointToEdit"));
         var spec = selected?.Spec ?? new BreakpointSpec(displayedFile?.File.Path is null ? BreakpointKind.Command : BreakpointKind.Line, displayedFile?.File.Path,
             Line: ScriptEditor.TextArea.Caret.Line);
         await PrepareBreakpointEditAsync(session);
@@ -318,8 +318,8 @@ public sealed partial class WorkbenchControl
 
     private async Task PrepareBreakpointEditAsync(SessionModel session)
     {
-        if (session.Evaluating) throw new InvalidOperationException("Wait for debugger evaluation to finish before editing breakpoints.");
-        if (session.EditingBreakpoints) throw new InvalidOperationException("A breakpoint edit is already waiting for execution to pause.");
+        if (session.Evaluating) throw new InvalidOperationException(UiText.Get("WaitForDebuggerEvaluation"));
+        if (session.EditingBreakpoints) throw new InvalidOperationException(UiText.Get("BreakpointEditPending"));
         session.EditingBreakpoints = true;
         RefreshState();
         try
