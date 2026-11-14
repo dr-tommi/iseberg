@@ -105,6 +105,29 @@ Ctrl+Space requests completion explicitly, even with automatic IntelliSense disa
 
 **Replace** provides literal or .NET regular-expression matching, case and whole-word options, upward search, wrap-around, and a selection-only scope. Regex replacements support capture groups such as `$1` and `${name}`; literal replacements do not interpret dollar signs. Find Next, Replace Next, and Replace All stay available in one dialog, with explicit match/error feedback. Replace All is one undoable edit. Matching-brace navigation uses parser tokens, ignores braces in comments/literal text, includes nested subexpressions, and expands script folds when needed.
 
+### Script analysis
+
+Parser errors are underlined in red. Two optional checks in the **Tools** menu add underlines and are remembered between sessions:
+
+- **Check Windows PowerShell 5.1 Compatibility** flags syntax and command parameters that Windows PowerShell 5.1 does not support, such as `??`, `? :`, `&&`, `${x}?.Length`, or `ForEach-Object -Parallel`. Calls to functions defined in the same script are not flagged.
+- **Apply PSScriptAnalyzer Rules** applies PSScriptAnalyzer's default rules, such as avoiding aliases or `Write-Host`.
+
+Errors are red, warnings amber. Hover an underline for its message; the line below the Script Pane lists the first findings. Both checks run in a separate background runspace, so they neither wait for nor change your PowerShell tabs. The first check after starting takes several seconds while PSScriptAnalyzer loads.
+
+PSScriptAnalyzer is not bundled. Install it once with `Install-Module PSScriptAnalyzer -Scope CurrentUser`; Iseberg loads its binary module directly, so the execution policy does not need to change. Without it, only the built-in 5.1 syntax checks run and the diagnostics line says so.
+
+### Automatic corrections
+
+These **Edit** menu commands, also in the Script Pane's context menu, use PSScriptAnalyzer:
+
+| Command | Shortcut | Effect |
+|---|---|---|
+| **Format Document** | Ctrl+Shift+F | Formats the selection, or the whole script: indentation, spacing, brace placement, and cmdlet and parameter capitalization. |
+| **Fix** | Ctrl+. | Applies the suggested correction of the finding at the caret, for example replacing the alias `gci` with `Get-ChildItem`. |
+| **Clean Up Script** | | Applies every suggested correction of the default rules, then formats the script. |
+
+Fix and Clean Up Script analyze the current text themselves, so they work while **Apply PSScriptAnalyzer Rules** is off. Only some rules suggest a correction; findings such as `Write-Host` stay as they are. Each command is one undoable edit, and only the changed text is replaced. If the script changes while a command runs, the result is discarded and the status bar says so. The commands are unavailable while the Script Pane is read-only, for example while debugging.
+
 ## Snippets
 
 ### Browse and insert

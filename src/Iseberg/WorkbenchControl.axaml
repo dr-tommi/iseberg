@@ -42,6 +42,10 @@
         <MenuItem Header="_Go to Line..." InputGesture="Ctrl+G" Tag="GoToLine" Click="OnAction" />
         <MenuItem Header="Go to Matching _Brace" InputGesture="Ctrl+OemCloseBrackets" Tag="MatchBrace" Click="OnAction" />
         <MenuItem Header="Select to Matching Brace" InputGesture="Ctrl+Shift+OemCloseBrackets" Tag="SelectBrace" Click="OnAction" />
+        <Separator />
+        <MenuItem Header="Format Document" InputGesture="Ctrl+Shift+F" Tag="FormatDocument" Click="OnAction" />
+        <MenuItem Header="Fix" InputGesture="Ctrl+OemPeriod" Tag="QuickFix" Click="OnAction" />
+        <MenuItem Header="Clean Up Script" Tag="CleanUp" Click="OnAction" />
       </MenuItem>
       <MenuItem Header="_View">
         <MenuItem Header="Show Script Pane _Top" InputGesture="Ctrl+1" Tag="Top" Click="OnAction" />

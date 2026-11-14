@@ -146,6 +146,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         ScriptEditor.TextArea.TextView.BackgroundRenderers.Add(new ScriptAdornments(
             () => displayedFile, () => CurrentFileDebugLocation(), () => settings.Theme));
         ConfigureScriptIssues();
+        ConfigureCorrections();
         breakpointMargin = new(() => displayedFile, () => CurrentFileDebugLocation(), () => settings.Theme)
         {
             Name = "BreakpointGutter",
@@ -392,6 +393,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         if (next == displayedFile) return;
         if (displayedFile is not null) displayedFile.File.CaretOffset = ScriptEditor.CaretOffset;
         displayedFile = next;
+        correctionNotice = null;
         Completion?.Close();
         if (folding is not null) FoldingManager.Uninstall(folding);
         folding = null;
@@ -478,7 +480,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         else displayedSession?.FlushOutput();
         StatusText.Text = state switch
         {
-            SessionState.Ready => completionNotice ?? updateNotice ?? UiText.Get("Ready"),
+            SessionState.Ready => completionNotice ?? correctionNotice ?? updateNotice ?? UiText.Get("Ready"),
             SessionState.Running => UiText.Get(displayedSession?.EditingBreakpoints == true ? "PauseForBreakpointEdit" : "Running"),
             SessionState.Debugging => string.Format(UiText.Get("DebugStatus"), displayedSession?.DebugLocation?.Line),
             SessionState.NestedPrompt => UiText.Get("NestedPromptStatus"),
@@ -533,6 +535,9 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             case "Find": ScriptEditorControl.ShowFind(); break;
             case "Replace": await ReplaceAsync(); break;
             case "GoToLine": await GoToLineAsync(); break;
+            case "FormatDocument": await FormatDocumentAsync(); break;
+            case "QuickFix": await QuickFixAsync(); break;
+            case "CleanUp": await CleanUpAsync(); break;
             case "MatchBrace": case "SelectBrace": NavigateBrace(action == "SelectBrace"); break;
             case "Run": if (session?.Engine.State == SessionState.Debugging) session.Engine.Resume(DebuggerResumeAction.Continue); else await RunScriptAsync(false); break;
             case "RunSelection": await RunScriptAsync(true); break;
@@ -1035,11 +1040,22 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             item.Click += OnAction;
             menu.Items.Add(item);
         }
+        if (editor == ScriptEditor)
+        {
+            menu.Items.Add(new Separator());
+            foreach (var (action, gesture) in new[] { ("QuickFix", "Ctrl+OemPeriod"), ("FormatDocument", "Ctrl+Shift+F"), ("CleanUp", "") })
+            {
+                var item = new MenuItem { Header = UiText.Get(action), Tag = action, Icon = new ToolbarIcon { Kind = action } };
+                if (gesture.Length > 0) item.InputGesture = Avalonia.Input.KeyGesture.Parse(gesture);
+                item.Click += OnAction;
+                menu.Items.Add(item);
+            }
+        }
         menu.Opening += (_, _) =>
         {
             editTarget = editor;
             foreach (var item in menu.Items.OfType<MenuItem>())
-                item.IsEnabled = item.Tag is string action && CanEdit(action);
+                item.IsEnabled = item.Tag is string action && (IsCorrectionAction(action) ? CanCorrectScript : CanEdit(action));
         };
         return menu;
     }
@@ -1134,6 +1150,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
                 "Reload" => displayedFile?.File.Path is not null && ready && !closingInProgress,
                 "Undo" or "Redo" or "Cut" or "Copy" or "Paste" or "SelectAll" => CanEdit(action),
                 "Replace" => !paused,
+                "FormatDocument" or "QuickFix" or "CleanUp" => CanCorrectScript,
                 "CheckForUpdates" => !checkingForUpdates,
                 _ => true
             };
@@ -1807,7 +1824,8 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             Key.S when ctrl => shift ? "SaveAs" : "Save",
             Key.W when ctrl => shift ? "CloseSession" : "Close",
             Key.T when ctrl => "NewSession",
-            Key.F when ctrl => "Find",
+            Key.F when ctrl => shift ? "FormatDocument" : "Find",
+            Key.OemPeriod when ctrl => "QuickFix",
             Key.H when ctrl => "Replace",
             Key.G when ctrl => "GoToLine",
             Key.OemCloseBrackets when ctrl => shift ? "SelectBrace" : "MatchBrace",

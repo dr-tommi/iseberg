@@ -7,8 +7,15 @@ namespace Iseberg.Core;
 
 public enum ScriptIssueSeverity { Information, Warning, Error }
 
-/// <summary>A finding located by zero-based UTF-16 offset in the analyzed text.</summary>
-public sealed record ScriptIssue(string Rule, string Message, ScriptIssueSeverity Severity, int Start, int Length);
+/// <summary>A replacement suggested for a finding, located by zero-based UTF-16 offset in the analyzed text.</summary>
+public sealed record ScriptCorrection(int Start, int Length, string Text, string Description);
+
+/// <summary>A finding located by zero-based UTF-16 offset in the analyzed text, with any suggested corrections.</summary>
+public sealed record ScriptIssue(string Rule, string Message, ScriptIssueSeverity Severity, int Start, int Length,
+    IReadOnlyList<ScriptCorrection>? Corrections = null)
+{
+    public IReadOnlyList<ScriptCorrection> Fixes => Corrections ?? [];
+}
 
 /// <summary>Which optional checks run. Both are opt-in so PowerShell 7 authors are not flagged by default.</summary>
 public sealed record ScriptAnalyzerOptions(bool WindowsPowerShellCompatibility, bool DefaultRules)
@@ -37,6 +44,71 @@ public sealed class ScriptAnalyzerService : IDisposable
     private bool moduleChecked;
     private string? moduleError;
     private bool disposed;
+
+    /// <summary>Why PSScriptAnalyzer could not be used, or null while it is available or not yet loaded.</summary>
+    public string? ModuleError => moduleError;
+
+    /// <summary>
+    /// Formats a script with Invoke-Formatter. With a range (one-based start line, start column, end line, end column)
+    /// only that part is formatted, but the whole script text is returned. Returns null when the module is unavailable.
+    /// </summary>
+    public async Task<string?> FormatAsync(string text, int[]? range = null, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(text);
+        if (range is not null && range.Length != 4) throw new ArgumentException("A range has four numbers.", nameof(range));
+        ObjectDisposedException.ThrowIf(disposed, this);
+        if (string.IsNullOrWhiteSpace(text)) return text;
+        await gate.WaitAsync(cancellationToken);
+        try
+        {
+            ObjectDisposedException.ThrowIf(disposed, this);
+            return await Task.Run(() =>
+            {
+                if (!EnsureModule()) return null;
+                using var shell = PowerShell.Create();
+                shell.Runspace = runspace;
+                shell.AddCommand("Invoke-Formatter").AddParameter("ScriptDefinition", text);
+                if (range is not null) shell.AddParameter("Range", range);
+                using var registration = cancellationToken.Register(() => shell.Stop());
+                var result = shell.Invoke<string>().FirstOrDefault();
+                cancellationToken.ThrowIfCancellationRequested();
+                if (shell.HadErrors) throw new InvalidOperationException(string.Join(Environment.NewLine, shell.Streams.Error));
+                return result ?? text;
+            }, cancellationToken);
+        }
+        finally { gate.Release(); }
+    }
+
+    /// <summary>
+    /// Applies every correction PSScriptAnalyzer's default rules suggest, then formats the result. Returns null when
+    /// the module is unavailable.
+    /// </summary>
+    public async Task<string?> CleanUpAsync(string text, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(text);
+        var analysis = await AnalyzeAsync(text, new(WindowsPowerShellCompatibility: false, DefaultRules: true), cancellationToken);
+        if (!analysis.ModuleAvailable) return null;
+        var corrected = ApplyCorrections(text, analysis.Issues.SelectMany(issue => issue.Fixes));
+        return await FormatAsync(corrected, null, cancellationToken);
+    }
+
+    /// <summary>Applies corrections to text. Corrections that overlap one already applied are skipped.</summary>
+    public static string ApplyCorrections(string text, IEnumerable<ScriptCorrection> corrections)
+    {
+        ArgumentNullException.ThrowIfNull(text);
+        ArgumentNullException.ThrowIfNull(corrections);
+        var builder = new System.Text.StringBuilder(text);
+        var lowestApplied = int.MaxValue;
+        // From the end, so earlier offsets stay valid.
+        foreach (var correction in corrections.Where(c => c.Start >= 0 && c.Length >= 0 && c.Start + c.Length <= text.Length)
+                     .OrderByDescending(c => c.Start).ThenByDescending(c => c.Length))
+        {
+            if (correction.Start + correction.Length > lowestApplied) continue;
+            builder.Remove(correction.Start, correction.Length).Insert(correction.Start, correction.Text);
+            lowestApplied = correction.Start;
+        }
+        return builder.ToString();
+    }
 
     /// <summary>Analyzes text. Calls are serialized; a canceled call stops the running pipeline.</summary>
     public async Task<ScriptAnalyzerResult> AnalyzeAsync(string text, ScriptAnalyzerOptions options, CancellationToken cancellationToken = default)
@@ -174,6 +246,21 @@ public sealed class ScriptAnalyzerService : IDisposable
                 if (severity == "ParseError" || record.Properties["Extent"]?.Value is not IScriptExtent extent) continue;
                 var start = OffsetOf(text, extent.StartLineNumber, extent.StartColumnNumber);
                 var end = OffsetOf(text, extent.EndLineNumber, extent.EndColumnNumber);
+                var corrections = new List<ScriptCorrection>();
+                if (record.Properties["SuggestedCorrections"]?.Value is IEnumerable suggested)
+                    foreach (var item in suggested)
+                    {
+                        if (item is null) continue;
+                        var correction = PSObject.AsPSObject(item);
+                        int Number(string name) => Convert.ToInt32(correction.Properties[name]?.Value ?? 0, System.Globalization.CultureInfo.InvariantCulture);
+                        // Rules without a concrete fix report an empty correction at line 0.
+                        if (Number("StartLineNumber") < 1 || Number("StartColumnNumber") < 1) continue;
+                        var from = OffsetOf(text, Number("StartLineNumber"), Number("StartColumnNumber"));
+                        var to = OffsetOf(text, Number("EndLineNumber"), Number("EndColumnNumber"));
+                        if (to < from) continue;
+                        corrections.Add(new(from, to - from, Convert.ToString(correction.Properties["Text"]?.Value) ?? "",
+                            Convert.ToString(correction.Properties["Description"]?.Value) ?? ""));
+                    }
                 issues.Add(new(Convert.ToString(record.Properties["RuleName"]?.Value) ?? "",
                     Convert.ToString(record.Properties["Message"]?.Value) ?? "",
                     severity switch
@@ -181,7 +268,7 @@ public sealed class ScriptAnalyzerService : IDisposable
                         "Error" => ScriptIssueSeverity.Error,
                         "Information" => ScriptIssueSeverity.Information,
                         _ => ScriptIssueSeverity.Warning
-                    }, start, Math.Max(1, end - start)));
+                    }, start, Math.Max(1, end - start), corrections.Count == 0 ? null : corrections));
             }
         }
         catch (Exception exception) when (exception is RuntimeException or InvalidOperationException)

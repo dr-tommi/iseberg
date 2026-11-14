@@ -416,4 +416,13 @@ Den Funktionsumfang beschreibt die README.md, offene Arbeiten stehen in den GitH
   <data name="OpenTemplateFolder" xml:space="preserve"><value>Vorlagenordner öffnen</value></data>
   <data name="NoTemplates" xml:space="preserve"><value>Keine Vorlagen gefunden. Legen Sie .ps1-Dateien in {0} ab.</value></data>
   <data name="TemplateFolderOpenFailed" xml:space="preserve"><value>Der Vorlagenordner konnte nicht geöffnet werden.</value></data>
+  <data name="FormatDocument" xml:space="preserve"><value>D_okument formatieren</value></data>
+  <data name="QuickFix" xml:space="preserve"><value>Korr_igieren</value></data>
+  <data name="CleanUp" xml:space="preserve"><value>Skript _bereinigen</value></data>
+  <data name="ScriptFormatted" xml:space="preserve"><value>Skript formatiert. Strg+Z macht es rückgängig.</value></data>
+  <data name="ScriptCleanedUp" xml:space="preserve"><value>Skript bereinigt. Strg+Z macht es rückgängig.</value></data>
+  <data name="QuickFixApplied" xml:space="preserve"><value>'{0}' durch '{1}' ersetzt. Strg+Z macht es rückgängig.</value></data>
+  <data name="NoQuickFix" xml:space="preserve"><value>An der Einfügemarke gibt es keine automatische Korrektur.</value></data>
+  <data name="NothingToCorrect" xml:space="preserve"><value>Es gibt nichts zu ändern.</value></data>
+  <data name="CorrectionDiscarded" xml:space="preserve"><value>Das Skript wurde inzwischen geändert, daher wurde das Ergebnis verworfen. Bitte erneut versuchen.</value></data>
 </root>

@@ -416,4 +416,13 @@ See README.md for implemented behavior and GitHub issues for remaining work.</va
   <data name="OpenTemplateFolder" xml:space="preserve"><value>Open Template Folder</value></data>
   <data name="NoTemplates" xml:space="preserve"><value>No templates found. Add .ps1 files to {0}.</value></data>
   <data name="TemplateFolderOpenFailed" xml:space="preserve"><value>The template folder could not be opened.</value></data>
+  <data name="FormatDocument" xml:space="preserve"><value>F_ormat Document</value></data>
+  <data name="QuickFix" xml:space="preserve"><value>Fi_x</value></data>
+  <data name="CleanUp" xml:space="preserve"><value>Clea_n Up Script</value></data>
+  <data name="ScriptFormatted" xml:space="preserve"><value>Script formatted. Ctrl+Z undoes it.</value></data>
+  <data name="ScriptCleanedUp" xml:space="preserve"><value>Script cleaned up. Ctrl+Z undoes it.</value></data>
+  <data name="QuickFixApplied" xml:space="preserve"><value>Replaced '{0}' with '{1}'. Ctrl+Z undoes it.</value></data>
+  <data name="NoQuickFix" xml:space="preserve"><value>There is no automatic fix at the caret.</value></data>
+  <data name="NothingToCorrect" xml:space="preserve"><value>Nothing to change.</value></data>
+  <data name="CorrectionDiscarded" xml:space="preserve"><value>The script changed meanwhile, so the result was discarded. Try again.</value></data>
 </root>
