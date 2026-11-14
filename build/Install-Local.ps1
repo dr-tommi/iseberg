@@ -121,11 +121,16 @@ try {
         throw "Der Zielordner '$InstallPath' ist nicht leer und enthält keine Iseberg.exe. Er wird nicht überschrieben."
     }
 
-    $running = @(Get-Process -Name Iseberg -ErrorAction SilentlyContinue | Where-Object {
-            $_.Path -and $_.Path.StartsWith($InstallPath, [System.StringComparison]::OrdinalIgnoreCase) })
-    if ($running.Count -gt 0) {
-        throw "Iseberg läuft noch aus '$InstallPath' (PID $($running.Id -join ', ')). Bitte schließen und erneut starten."
+    function Assert-NotRunning {
+        # Bei einem Iseberg mit Administratorrechten ist der Pfad für dieses Skript nicht lesbar; er zählt dann als laufend.
+        $running = @(Get-Process -Name Iseberg -ErrorAction SilentlyContinue | Where-Object {
+                -not $_.Path -or $_.Path.StartsWith($InstallPath, [System.StringComparison]::OrdinalIgnoreCase) })
+        if ($running.Count -gt 0) {
+            throw ("Iseberg läuft noch (PID {0}), möglicherweise mit Administratorrechten. " +
+                'Bitte alle Iseberg-Fenster schließen und mit -SkipTests erneut starten.') -f ($running.Id -join ', ')
+        }
     }
+    Assert-NotRunning
 
     if ($SkipTests) { Write-Log 'Tests übersprungen (-SkipTests).' }
     else { Invoke-DotNet -Arguments @('test', $solution, '-c', 'Release', '--nologo') }
@@ -142,6 +147,8 @@ try {
     finally { [System.IO.File]::WriteAllBytes($lockFile, $lockBytes) }
     Test-PublishedRuntime -Executable (Join-Path $staging 'Iseberg.exe')
 
+    # Tests und Veröffentlichen dauern Minuten; Iseberg kann in der Zwischenzeit gestartet worden sein.
+    Assert-NotRunning
     if ($PSCmdlet.ShouldProcess($InstallPath, 'Iseberg-Dateien spiegeln')) {
         New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null
         # /MIR entfernt auch veraltete Dateien früherer Builds. Robocopy meldet Erfolg mit Codes unter 8.
