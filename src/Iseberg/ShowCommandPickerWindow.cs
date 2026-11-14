@@ -11,6 +11,8 @@ public sealed class ShowCommandPickerWindow : Window
 {
     public ShowCommandPickerWindow(IReadOnlyList<CommandDescription> commands)
     {
+        // The control themes come from per-window styles, so apply them before any content is created.
+        DesktopTheme.ApplyWindow(this);
         Title = UiText.Get("ShowCommand").Replace("_", "").TrimEnd('.');
         Width = 500;
         Height = 600;

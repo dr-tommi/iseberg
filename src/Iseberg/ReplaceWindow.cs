@@ -28,6 +28,8 @@ public sealed class ReplaceWindow : Window
 
     public ReplaceWindow(TextEditor editor)
     {
+        // The control themes come from per-window styles, so apply them before any content is created.
+        DesktopTheme.ApplyWindow(this);
         this.editor = editor;
         Title = UiText.Get("Replace").Replace("_", "").TrimEnd('.');
         Width = 480;

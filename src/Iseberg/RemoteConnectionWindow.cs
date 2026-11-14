@@ -10,6 +10,8 @@ public sealed class RemoteConnectionWindow : Window
 {
     public RemoteConnectionWindow()
     {
+        // The control themes come from per-window styles, so apply them before any content is created.
+        DesktopTheme.ApplyWindow(this);
         Title = UiText.Get("NewRemoteSession").Replace("_", "");
         Width = 480;
         SizeToContent = SizeToContent.Height;

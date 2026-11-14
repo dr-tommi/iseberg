@@ -11,6 +11,8 @@ public sealed class SnippetWindow : Window
 {
     public SnippetWindow(IReadOnlyList<PowerShellSnippet> snippets)
     {
+        // The control themes come from per-window styles, so apply them before any content is created.
+        DesktopTheme.ApplyWindow(this);
         Title = UiText.Get("Snippets").Replace("_", "").TrimEnd('.');
         Width = 700;
         Height = 520;

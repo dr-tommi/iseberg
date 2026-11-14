@@ -12,6 +12,8 @@ public sealed class EncodingWindow : Window
 {
     public EncodingWindow(ScriptEncoding current, bool canReload, bool openingFile = false)
     {
+        // The control themes come from per-window styles, so apply them before any content is created.
+        DesktopTheme.ApplyWindow(this);
         Title = UiText.Get("EncodingTitle");
         Width = 480;
         SizeToContent = SizeToContent.Height;

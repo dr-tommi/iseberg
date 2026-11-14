@@ -11,6 +11,8 @@ public sealed class HostInputWindow : Window
 {
     public HostInputWindow(InputRequest request)
     {
+        // The control themes come from per-window styles, so apply them before any content is created.
+        DesktopTheme.ApplyWindow(this);
         Title = request.Caption;
         Width = 480;
         SizeToContent = SizeToContent.Height;
