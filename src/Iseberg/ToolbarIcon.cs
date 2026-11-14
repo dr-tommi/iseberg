@@ -41,6 +41,13 @@ public sealed class ToolbarIcon : Control
             case "CheckSignature":
                 Shape("M3,1 L11,1 15,5 15,17 3,17 Z", Brushes.White);
                 Shape("M5,10 L8,13 13,6", Brushes.Transparent); break;
+            case "FileVersions": case "KeepFileVersions":
+                Shape("M9,2 C5,2 2,5 2,9 C2,13 5,16 9,16 C13,16 16,13 16,9 C16,5 13,2 9,2 Z", Brushes.White);
+                Shape("M9,5 L9,9 12,11", Brushes.Transparent); break;
+            case "CompareWithSaved":
+                Shape("M1,2 L8,2 8,16 1,16 Z", Brushes.MistyRose);
+                Shape("M10,2 L17,2 17,16 10,16 Z", Brushes.Honeydew);
+                Shape("M3,6 L6,6 M12,6 L15,6 M12,10 L15,10", Brushes.Transparent); break;
             case "FormatDocument":
                 Shape("M2,4 L16,4 M5,8 L16,8 M5,12 L16,12 M2,16 L16,16", Brushes.Transparent); break;
             case "QuickFix":

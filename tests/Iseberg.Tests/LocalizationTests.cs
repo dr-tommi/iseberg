@@ -48,7 +48,7 @@ public sealed class LocalizationTests
         var menus = new Dictionary<string, string[]>
         {
             ["Main"] = ["FileMenu", "EditMenu", "ViewMenu", "ToolsMenu", "DebugMenu", "AddonsMenu", "HelpMenu"],
-            ["File"] = ["New", "NewFromTemplate", "Open", "Save", "SaveAs", "SaveAll", "Encoding", "Reload", "Print", "SignScript", "CheckSignature", "Close", "RecentFiles",
+            ["File"] = ["New", "NewFromTemplate", "Open", "Save", "SaveAs", "SaveAll", "Encoding", "Reload", "Print", "SignScript", "CheckSignature", "FileVersions", "CompareWithSaved", "KeepFileVersions", "Close", "RecentFiles",
                 "NewSession", "NewRemoteSession", "OpenRemoteFile", "ExitRemoteSession", "CloseSession", "Exit"],
             ["Edit"] = ["Undo", "Redo", "Cut", "Copy", "Paste", "SelectAll", "Find", "Replace", "GoToLine", "MatchBrace", "SelectBrace",
                 "FormatDocument", "QuickFix", "CleanUp"],

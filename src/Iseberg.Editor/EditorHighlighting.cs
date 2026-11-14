@@ -6,7 +6,8 @@ using AvaloniaEdit.Highlighting.Xshd;
 
 namespace Iseberg.Editor;
 
-internal static class EditorHighlighting
+/// <summary>The PowerShell syntax colors used by the script editor, for read-only views that show script text.</summary>
+public static class EditorHighlighting
 {
     public static IHighlightingDefinition Create(bool dark)
     {

@@ -465,4 +465,28 @@ See README.md for implemented behavior and GitHub issues for remaining work.</va
   <data name="RiskyRunTitle" xml:space="preserve"><value>Risky commands</value></data>
   <data name="RiskyRunPrompt" xml:space="preserve"><value>This script contains {0} high-risk command(s): {1}. Run it anyway?</value></data>
   <data name="RunAnyway" xml:space="preserve"><value>Run Anyway</value></data>
+  <data name="FileVersions" xml:space="preserve"><value>File _Versions...</value></data>
+  <data name="CompareWithSaved" xml:space="preserve"><value>Compare with Sa_ved File...</value></data>
+  <data name="KeepFileVersions" xml:space="preserve"><value>Keep File Versions</value></data>
+  <data name="FileVersionsTitle" xml:space="preserve"><value>Versions of {0}</value></data>
+  <data name="FileVersionsList" xml:space="preserve"><value>Saved versions</value></data>
+  <data name="NoFileVersions" xml:space="preserve"><value>No versions yet. A version is kept each time the file is saved.</value></data>
+  <data name="CompareWithEditor" xml:space="preserve"><value>Version compared with the editor</value></data>
+  <data name="CompareWithPrevious" xml:space="preserve"><value>Previous version compared with this version</value></data>
+  <data name="CompareTargetName" xml:space="preserve"><value>Compare with</value></data>
+  <data name="DiffText" xml:space="preserve"><value>Differences</value></data>
+  <data name="RestoreVersion" xml:space="preserve"><value>Restore in Editor</value></data>
+  <data name="OpenVersionAsNew" xml:space="preserve"><value>Open as New File</value></data>
+  <data name="ClearFileHistory" xml:space="preserve"><value>Delete History...</value></data>
+  <data name="ClearFileHistoryPrompt" xml:space="preserve"><value>Delete all {0} saved version(s) of this file? This cannot be undone.</value></data>
+  <data name="DeleteButton" xml:space="preserve"><value>Delete</value></data>
+  <data name="CloseButton" xml:space="preserve"><value>Close</value></data>
+  <data name="DiffIdentical" xml:space="preserve"><value>No differences</value></data>
+  <data name="DiffCounts" xml:space="preserve"><value>+{0} added, -{1} removed lines</value></data>
+  <data name="FileVersionLine" xml:space="preserve"><value>{0:g}   {1}   +{2} -{3}</value></data>
+  <data name="FileVersionSaved" xml:space="preserve"><value>(saved)</value></data>
+  <data name="FileVersionFailed" xml:space="preserve"><value>The file was saved, but no version could be kept: {0}</value></data>
+  <data name="FileHistoryCleared" xml:space="preserve"><value>The version history of this file was deleted.</value></data>
+  <data name="FileVersionRestored" xml:space="preserve"><value>The version from {0:g} is in the editor; save to keep it, or undo to return.</value></data>
+  <data name="CompareWithSavedTitle" xml:space="preserve"><value>Unsaved changes in {0}</value></data>
 </root>

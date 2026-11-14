@@ -465,4 +465,28 @@ Den Funktionsumfang beschreibt die README.md, offene Arbeiten stehen in den GitH
   <data name="RiskyRunTitle" xml:space="preserve"><value>Riskante Befehle</value></data>
   <data name="RiskyRunPrompt" xml:space="preserve"><value>Dieses Skript enthält {0} Befehl(e) mit hohem Risiko: {1}. Trotzdem ausführen?</value></data>
   <data name="RunAnyway" xml:space="preserve"><value>Trotzdem ausführen</value></data>
+  <data name="FileVersions" xml:space="preserve"><value>Dateiversionen _anzeigen...</value></data>
+  <data name="CompareWithSaved" xml:space="preserve"><value>_Mit gespeicherter Datei vergleichen...</value></data>
+  <data name="KeepFileVersions" xml:space="preserve"><value>Dateiversionen aufbewahren</value></data>
+  <data name="FileVersionsTitle" xml:space="preserve"><value>Versionen von {0}</value></data>
+  <data name="FileVersionsList" xml:space="preserve"><value>Gespeicherte Versionen</value></data>
+  <data name="NoFileVersions" xml:space="preserve"><value>Noch keine Versionen. Bei jedem Speichern der Datei wird eine Version aufbewahrt.</value></data>
+  <data name="CompareWithEditor" xml:space="preserve"><value>Version verglichen mit dem Editor</value></data>
+  <data name="CompareWithPrevious" xml:space="preserve"><value>Vorherige Version verglichen mit dieser</value></data>
+  <data name="CompareTargetName" xml:space="preserve"><value>Vergleichen mit</value></data>
+  <data name="DiffText" xml:space="preserve"><value>Unterschiede</value></data>
+  <data name="RestoreVersion" xml:space="preserve"><value>Im Editor wiederherstellen</value></data>
+  <data name="OpenVersionAsNew" xml:space="preserve"><value>Als neue Datei öffnen</value></data>
+  <data name="ClearFileHistory" xml:space="preserve"><value>Verlauf löschen...</value></data>
+  <data name="ClearFileHistoryPrompt" xml:space="preserve"><value>Alle {0} gespeicherten Versionen dieser Datei löschen? Das lässt sich nicht rückgängig machen.</value></data>
+  <data name="DeleteButton" xml:space="preserve"><value>Löschen</value></data>
+  <data name="CloseButton" xml:space="preserve"><value>Schließen</value></data>
+  <data name="DiffIdentical" xml:space="preserve"><value>Keine Unterschiede</value></data>
+  <data name="DiffCounts" xml:space="preserve"><value>+{0} hinzugefügte, -{1} entfernte Zeilen</value></data>
+  <data name="FileVersionLine" xml:space="preserve"><value>{0:g}   {1}   +{2} -{3}</value></data>
+  <data name="FileVersionSaved" xml:space="preserve"><value>(gespeichert)</value></data>
+  <data name="FileVersionFailed" xml:space="preserve"><value>Die Datei wurde gespeichert, aber es konnte keine Version aufbewahrt werden: {0}</value></data>
+  <data name="FileHistoryCleared" xml:space="preserve"><value>Der Versionsverlauf dieser Datei wurde gelöscht.</value></data>
+  <data name="FileVersionRestored" xml:space="preserve"><value>Die Version vom {0:g} steht im Editor; zum Übernehmen speichern, mit Rückgängig zurück.</value></data>
+  <data name="CompareWithSavedTitle" xml:space="preserve"><value>Ungespeicherte Änderungen in {0}</value></data>
 </root>

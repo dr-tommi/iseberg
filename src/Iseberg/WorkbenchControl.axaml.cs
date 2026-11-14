@@ -675,6 +675,11 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             case "Print": await PrintScriptAsync(); break;
             case "SignScript": await SignScriptAsync(); break;
             case "CheckSignature": await CheckSignatureAsync(); break;
+            case "FileVersions": await ShowFileVersionsAsync(); break;
+            case "CompareWithSaved": await CompareWithSavedAsync(); break;
+            case "KeepFileVersions":
+                settings.KeepFileVersions = !settings.KeepFileVersions;
+                UpdateMenuState(); await SaveSettingsAsync(); break;
             case "About":
                 await Dialogs.ShowTextAsync(HostWindow, UiText.Get("AboutTitle"),
                     string.Format(UiText.Get("AboutText"), ApplicationVersion, session?.Engine.Version));
@@ -764,7 +769,9 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             path = result.TryGetLocalPath() ?? throw new IOException(UiText.Get("LocalScriptOnly"));
         }
         var previousPath = tab.File.Path;
+        await KeepVersionBeforeSaveAsync(path);
         if (!await SaveWithConflictCheckAsync(owner, tab, path, remote: false)) return false;
+        await KeepVersionAfterSaveAsync(tab);
         await autoSaveTask;
         RemoveRecovery(tab.RecoveryId);
         if (FileInCurrentRunspace(owner, tab) && (owner.Engine.State == SessionState.Ready || owner.Engine.IsDebuggerPaused))
@@ -1140,6 +1147,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
                 "AnalyzerRules" => settings.UseScriptAnalyzerRules,
                 "MarkRisks" => settings.MarkRiskyCommands,
                 "ConfirmRiskyRuns" => settings.ConfirmRiskyRuns,
+                "KeepFileVersions" => settings.KeepFileVersions,
                 "DebuggerPanes" => displayedSession?.DebuggerPaneVisible == true,
                 _ => false
             };
@@ -1167,6 +1175,9 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
                 "Replace" => !paused,
                 "FormatDocument" or "QuickFix" or "CleanUp" => CanCorrectScript,
                 "SignScript" or "CheckSignature" => CanSignScript,
+                "FileVersions" => CanShowFileVersions,
+                "CompareWithSaved" => CanCompareWithSaved,
+                "KeepFileVersions" => FileHistoryDirectory is not null,
                 "CheckForUpdates" => !checkingForUpdates,
                 _ => true
             };

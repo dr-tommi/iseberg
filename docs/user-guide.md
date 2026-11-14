@@ -372,6 +372,18 @@ Local files and files in an idle owning remote connection are checked for extern
 
 Unicode BOMs and existing line endings are preserved by default. Invalid BOM-less UTF-8 prompts for an explicit encoding rather than guessing a legacy code page.
 
+### File versions
+
+Each time a local script is saved, Iseberg keeps a copy of the saved bytes in `Iseberg/History` under local application data, one folder per file. Before the first versioned save of an existing file, its previous state on disk is kept too, so the original is never lost. Saving unchanged content adds no version. Remote files are not versioned.
+
+- **File > File Versions** lists the versions, newest first, with their time, size, and the lines added and removed compared with the editor. The version matching the saved file is marked *(saved)*. The diff shows removed lines on red and added lines on green, with the old and new line numbers. The comparison can be switched to *previous version compared with this version*.
+- **Restore in Editor** replaces the editor text with the version as a single edit: nothing is written to disk, Undo returns to the previous text, and saving keeps the restored state as a new version. **Open as New File** opens the version in a new untitled tab.
+- **Delete History** removes every version of the file after confirmation.
+- **File > Compare with Saved File** shows the unsaved edits against the file on disk.
+- **File > Keep File Versions** turns versioning off and on.
+
+Up to 50 versions per file are kept, and versions older than 90 days are removed when a new version is added; the newest version always stays. Both limits are `MaxFileVersions` and `FileVersionDays` in `Iseberg/settings.json` (zero means no limit). Versions are plain copies of your scripts: anything a script contained, including a secret pasted by mistake, stays in its versions until they are removed or the history is deleted.
+
 ### Printing
 
 **File > Print** (Ctrl+P) opens an offline HTML snapshot of the current script, including unsaved edits, in the default browser. Use the preview's Print button or the browser's print command to choose a printer or Save as PDF. Script markup is escaped and no external resources are loaded. The preview is a local plaintext temporary file, owner-only on Unix, and is removed on normal workbench closure; printing does not save the script or change its dirty state.

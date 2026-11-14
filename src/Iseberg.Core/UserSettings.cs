@@ -35,6 +35,12 @@ public sealed class UserSettings
     public bool MarkRiskyCommands { get; set; } = true;
     /// <summary>Asks before running a script or selection that calls high-risk commands.</summary>
     public bool ConfirmRiskyRuns { get; set; } = true;
+    /// <summary>Keeps a copy of local scripts after each save in the version history.</summary>
+    public bool KeepFileVersions { get; set; } = true;
+    /// <summary>The most versions kept per file; zero keeps any number.</summary>
+    public int MaxFileVersions { get; set; } = 50;
+    /// <summary>Versions older than this many days are removed; zero keeps them regardless of age.</summary>
+    public int FileVersionDays { get; set; } = 90;
     public int AutoSaveMinutes { get; set; } = 2;
     public int RecentFileCount { get; set; } = 10;
     public string FontFamily { get; set; } = "Lucida Console";
@@ -67,6 +73,8 @@ public sealed class UserSettings
         if (string.IsNullOrWhiteSpace(FontFamily)) FontFamily = "Lucida Console";
         AutoSaveMinutes = Math.Clamp(AutoSaveMinutes, 0, 120);
         RecentFileCount = Math.Clamp(RecentFileCount, 0, 100);
+        MaxFileVersions = Math.Clamp(MaxFileVersions, 0, 1000);
+        FileVersionDays = Math.Clamp(FileVersionDays, 0, 3650);
         IntelliSenseTimeoutSeconds = Math.Clamp(IntelliSenseTimeoutSeconds, 1, 30);
         Theme ??= new();
         Theme.Normalize();

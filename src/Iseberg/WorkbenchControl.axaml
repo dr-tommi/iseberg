@@ -19,6 +19,10 @@
         <MenuItem Tag="SignScript" Click="OnAction" />
         <MenuItem Tag="CheckSignature" Click="OnAction" />
         <Separator />
+        <MenuItem Tag="FileVersions" Click="OnAction" />
+        <MenuItem Tag="CompareWithSaved" Click="OnAction" />
+        <MenuItem Tag="KeepFileVersions" ToggleType="CheckBox" Click="OnAction" />
+        <Separator />
         <MenuItem Header="_Close" InputGesture="Ctrl+W" Tag="Close" Click="OnAction" />
         <MenuItem x:Name="RecentMenu" Header="Recent _Files" />
         <Separator />
