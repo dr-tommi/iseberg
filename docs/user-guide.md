@@ -128,6 +128,28 @@ These **Edit** menu commands, also in the Script Pane's context menu, use PSScri
 
 Fix and Clean Up Script analyze the current text themselves, so they work while **Apply PSScriptAnalyzer Rules** is off. Only some rules suggest a correction; findings such as `Write-Host` stay as they are. Each command is one undoable edit, and only the changed text is replaced. If the script changes while a command runs, the result is discarded and the status bar says so. The commands are unavailable while the Script Pane is read-only, for example while debugging.
 
+### Risky commands
+
+Calls to commands that change a tenant, a directory, or a system are shaded in the Script Pane: light red for high risk, light orange for medium risk. Hover a shaded command for the reason and the matching rule; the line below the Script Pane counts them. **Tools > Mark Risky Commands** turns the shading on or off.
+
+The rules are in `%LOCALAPPDATA%\Iseberg\RiskRules.json`, which **Tools > Edit Risk Rules** opens in the Script Pane. The first use creates it with starting rules for Teams (`Set-Cs*`, `Grant-Cs*`, …), Microsoft Graph (`New-Mg*`, `Update-Mg*`, `Remove-Mg*`, …), Exchange mailboxes, Active Directory, deleting commands (`Remove-*`, `Clear-*`), and computer shutdowns. Edit it freely; an existing file is never replaced, and changes apply to the next scan. Each rule has a `Pattern` with PowerShell wildcards and a `Reason`; an optional `Methods` list limits a rule to calls whose `-Method` is one of them, so `Invoke-MgGraphRequest` or `Invoke-RestMethod` with `-Method Get` stays unmarked. Comments and trailing commas are allowed. If the file cannot be read, the previous rules stay in use and the diagnostics line says why.
+
+```json
+{
+  "High": [
+    { "Pattern": "Set-Cs*", "Reason": "Changes the Teams configuration of the tenant" },
+    { "Pattern": "Invoke-MgGraphRequest", "Reason": "Writes through Microsoft Graph", "Methods": [ "Post", "Patch", "Put", "Delete" ] }
+  ],
+  "Medium": [
+    { "Pattern": "Restart-Service", "Reason": "Restarts a Windows service" }
+  ]
+}
+```
+
+Aliases of built-in commands, such as `rm` for `Remove-Item`, are resolved. A call with `-WhatIf` is one level lower, because it only reports what it would do. Only calls written in the script are found: commands run through `& $name`, `Invoke-Expression`, or other scripts and modules are not followed, which is why `Invoke-Expression` itself is a medium risk.
+
+With **Tools > Confirm Before Running Risky Scripts** (on by default), F5 and F8 ask before running a script or selection that calls high-risk commands, and list them. The shading and the prompt are aids: they do not prevent anything a script does once it runs.
+
 ## Snippets
 
 ### Browse and insert

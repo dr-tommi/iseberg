@@ -32,6 +32,9 @@ public sealed class ToolbarIcon : Control
         switch (Kind)
         {
             case "New": Shape("M3,1 L11,1 15,5 15,17 3,17 Z", Brushes.White); Shape("M11,1 L11,5 15,5", Brushes.LightGray); break;
+            case "MarkRisks":
+                Shape("M9,2 L17,16 1,16 Z", Brushes.Khaki);
+                Shape("M9,7 L9,11 M9,13 L9,14", Brushes.Transparent); break;
             case "SignScript":
                 Shape("M3,1 L11,1 15,5 15,17 3,17 Z", Brushes.White);
                 Shape("M5,13 C7,9 8,15 10,11 C11,9 12,13 13,12", Brushes.Transparent); break;
@@ -139,7 +142,7 @@ public sealed class ToolbarIcon : Control
             case "Clear":
                 Shape("M12,1 L16,3 9,15 3,12 Z", Brushes.Khaki);
                 Shape("M3,12 L9,15 7,18 1,15 Z", Brushes.SteelBlue); break;
-            case "Profiles": case "AutoProfiles": case "ExecutionPolicy": case "CompatibilityCheck": case "AnalyzerRules":
+            case "Profiles": case "AutoProfiles": case "ExecutionPolicy": case "CompatibilityCheck": case "AnalyzerRules": case "ConfirmRiskyRuns": case "EditRiskRules":
                 Shape("M3,1 L15,1 15,17 3,17 Z", Brushes.White);
                 Shape(Kind is not "ExecutionPolicy" ? "M6,5 L12,5 M6,8 L12,8 M6,11 L10,11" : "M5,8 L8,12 13,5", Brushes.Transparent); break;
             case "SelectAll":

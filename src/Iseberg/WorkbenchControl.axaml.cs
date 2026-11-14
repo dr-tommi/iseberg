@@ -147,6 +147,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             () => displayedFile, () => CurrentFileDebugLocation(), () => settings.Theme));
         ConfigureScriptIssues();
         ConfigureCorrections();
+        ConfigureRisks();
         breakpointMargin = new(() => displayedFile, () => CurrentFileDebugLocation(), () => settings.Theme)
         {
             Name = "BreakpointGutter",
@@ -656,6 +657,13 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             case "AnalyzerRules":
                 settings.UseScriptAnalyzerRules = !settings.UseScriptAnalyzerRules;
                 UpdateMenuState(); ScheduleScriptIssues(); await SaveSettingsAsync(); break;
+            case "MarkRisks":
+                settings.MarkRiskyCommands = !settings.MarkRiskyCommands;
+                UpdateMenuState(); RefreshRiskMarkers(); RefreshDiagnosticsLine(); await SaveSettingsAsync(); break;
+            case "ConfirmRiskyRuns":
+                settings.ConfirmRiskyRuns = !settings.ConfirmRiskyRuns;
+                UpdateMenuState(); await SaveSettingsAsync(); break;
+            case "EditRiskRules": await EditRiskRulesAsync(); break;
             case "ExecutionPolicy":
                 if (session is not null && OperatingSystem.IsWindows() &&
                     await Dialogs.ChooseAsync(HostWindow, UiText.Get("ExecutionPolicyTitle"), UiText.Get("ExecutionPolicyPrompt"),
@@ -862,6 +870,8 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         var session = displayedSession;
         var file = displayedFile;
         if (session is null || file is null) return;
+        if (!await ConfirmRiskyRunAsync(selection ? ScriptEditorControl.CaptureText(EditorTextScope.SelectionOrCurrentLine).Text : file.Document.Text))
+            return;
         if (selection)
         {
             var text = ScriptEditorControl.CaptureText(EditorTextScope.SelectionOrCurrentLine).Text;
@@ -1128,6 +1138,8 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
                 "AutoProfiles" => settings.LoadProfiles,
                 "CompatibilityCheck" => settings.CheckWindowsPowerShellCompatibility,
                 "AnalyzerRules" => settings.UseScriptAnalyzerRules,
+                "MarkRisks" => settings.MarkRiskyCommands,
+                "ConfirmRiskyRuns" => settings.ConfirmRiskyRuns,
                 "DebuggerPanes" => displayedSession?.DebuggerPaneVisible == true,
                 _ => false
             };

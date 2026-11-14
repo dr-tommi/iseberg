@@ -453,4 +453,16 @@ Den Funktionsumfang beschreibt die README.md, offene Arbeiten stehen in den GitH
   <data name="SignatureNotTrusted" xml:space="preserve"><value>nicht vertrauenswürdig: Der Signierer gilt auf diesem Computer nicht als vertrauenswürdig</value></data>
   <data name="SignatureIncompatible" xml:space="preserve"><value>inkompatibles Signaturformat</value></data>
   <data name="SignatureNotSupportedFileFormat" xml:space="preserve"><value>dieser Dateityp kann nicht signiert werden</value></data>
+  <data name="MarkRisks" xml:space="preserve"><value>Riskante Befehle markieren</value></data>
+  <data name="ConfirmRiskyRuns" xml:space="preserve"><value>Vor Ausführen riskanter Skripts nachfragen</value></data>
+  <data name="EditRiskRules" xml:space="preserve"><value>Risikoregeln bearbeiten</value></data>
+  <data name="RiskHigh" xml:space="preserve"><value>Hohes Risiko: {0} (Regel {1})</value></data>
+  <data name="RiskMedium" xml:space="preserve"><value>Mittleres Risiko: {0} (Regel {1})</value></data>
+  <data name="RiskWhatIf" xml:space="preserve"><value>Wegen -WhatIf um eine Stufe herabgesetzt.</value></data>
+  <data name="RiskCountHigh" xml:space="preserve"><value>{0} Befehl(e) mit hohem Risiko</value></data>
+  <data name="RiskCountMedium" xml:space="preserve"><value>{0} Befehl(e) mit mittlerem Risiko</value></data>
+  <data name="RiskRulesInvalid" xml:space="preserve"><value>Die Risikoregeln konnten nicht gelesen werden, daher gelten die bisherigen: {0}</value></data>
+  <data name="RiskyRunTitle" xml:space="preserve"><value>Riskante Befehle</value></data>
+  <data name="RiskyRunPrompt" xml:space="preserve"><value>Dieses Skript enthält {0} Befehl(e) mit hohem Risiko: {1}. Trotzdem ausführen?</value></data>
+  <data name="RunAnyway" xml:space="preserve"><value>Trotzdem ausführen</value></data>
 </root>

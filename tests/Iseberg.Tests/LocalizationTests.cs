@@ -55,7 +55,7 @@ public sealed class LocalizationTests
             ["View"] = ["PaneTop", "PaneRight", "PaneMaximized", "Commands", "LineNumbers", "WordWrap", "Fold", "FocusScript",
                 "FocusConsole", "ZoomIn", "ZoomOut"],
             ["Tools"] = ["Run", "RunSelection", "Stop", "Complete", "ShowCommand", "Snippets", "CreateSnippet", "ImportSnippets",
-                "ExportSnippets", "Clear", "Profiles", "AutoProfiles", "ExecutionPolicy", "OptionsMenu"],
+                "ExportSnippets", "Clear", "Profiles", "AutoProfiles", "ExecutionPolicy", "OptionsMenu", "MarkRisks", "ConfirmRiskyRuns", "EditRiskRules"],
             ["Debug"] = ["Breakpoint", "DebuggerPanes", "NewBreakpoint", "BreakAll", "RemoveBreakpoints", "StepInto", "StepOver",
                 "StepOut", "Continue", "Stop"],
             ["Help"] = ["Help", "CheckForUpdatesMenu", "About"]

@@ -83,6 +83,9 @@
         <Separator />
         <MenuItem Header="Check Windows PowerShell 5.1 Compatibility" Tag="CompatibilityCheck" ToggleType="CheckBox" Click="OnAction" />
         <MenuItem Header="Apply PSScriptAnalyzer Rules" Tag="AnalyzerRules" ToggleType="CheckBox" Click="OnAction" />
+        <MenuItem Header="Mark Risky Commands" Tag="MarkRisks" ToggleType="CheckBox" Click="OnAction" />
+        <MenuItem Header="Confirm Before Running Risky Scripts" Tag="ConfirmRiskyRuns" ToggleType="CheckBox" Click="OnAction" />
+        <MenuItem Header="Edit Risk Rules" Tag="EditRiskRules" Click="OnAction" />
         <Separator />
         <MenuItem Header="_Options..." Tag="Options" Click="OnAction" />
       </MenuItem>

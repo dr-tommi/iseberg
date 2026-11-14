@@ -85,7 +85,8 @@ public sealed partial class WorkbenchControl
     {
         var messages = ScriptIssueMarkers.Where(marker => marker.IsVisible && marker.Start.Document == ScriptEditorControl.Document &&
                 marker.Start.Offset <= offset && offset < marker.End.Offset)
-            .Select(marker => marker.Rule.Length > 0 ? $"{marker.Message} ({marker.Rule})" : marker.Message).Distinct().ToArray();
+            .Select(marker => marker.Rule.Length > 0 ? $"{marker.Message} ({marker.Rule})" : marker.Message)
+            .Concat(RiskMessagesAt(offset)).Distinct().ToArray();
         return messages.Length == 0 ? null : string.Join(Environment.NewLine, messages);
     }
 
@@ -108,8 +109,11 @@ public sealed partial class WorkbenchControl
         var document = ScriptEditorControl.Document;
         // Pending results carry no diagnostics; the anchored underlines stay until the parser has finished.
         if (result.State == EditorAnalysisState.Available)
+        {
             syntaxMarkers = result.Diagnostics.Select(diagnostic => CreateMarker(document, diagnostic.Span.Start, diagnostic.Span.Length,
                 ScriptIssueSeverity.Error, "", diagnostic.Message)).ToArray();
+            RefreshRiskMarkers();
+        }
         else if (syntaxMarkers.Any(marker => marker.Start.Document != document)) syntaxMarkers = [];
         if (issueMarkers.Any(marker => marker.Start.Document != document)) issueMarkers = [];
         RefreshDiagnosticsLine();
@@ -170,6 +174,7 @@ public sealed partial class WorkbenchControl
         var shown = lines.Take(3).ToList();
         if (lines.Count > shown.Count) shown.Add(string.Format(UiText.Get("DiagnosticMore"), lines.Count - shown.Count));
         if (analyzerNotice is not null) shown.Add(analyzerNotice);
+        shown.AddRange(RiskSummary());
         Diagnostics.IsVisible = shown.Count > 0;
         Diagnostics.Text = string.Join("  |  ", shown);
     }

@@ -453,4 +453,16 @@ See README.md for implemented behavior and GitHub issues for remaining work.</va
   <data name="SignatureNotTrusted" xml:space="preserve"><value>not trusted: the signer is not trusted on this computer</value></data>
   <data name="SignatureIncompatible" xml:space="preserve"><value>incompatible signature format</value></data>
   <data name="SignatureNotSupportedFileFormat" xml:space="preserve"><value>this file type cannot be signed</value></data>
+  <data name="MarkRisks" xml:space="preserve"><value>Mark Risky Commands</value></data>
+  <data name="ConfirmRiskyRuns" xml:space="preserve"><value>Confirm Before Running Risky Scripts</value></data>
+  <data name="EditRiskRules" xml:space="preserve"><value>Edit Risk Rules</value></data>
+  <data name="RiskHigh" xml:space="preserve"><value>High risk: {0} (rule {1})</value></data>
+  <data name="RiskMedium" xml:space="preserve"><value>Medium risk: {0} (rule {1})</value></data>
+  <data name="RiskWhatIf" xml:space="preserve"><value>Lowered by one level because of -WhatIf.</value></data>
+  <data name="RiskCountHigh" xml:space="preserve"><value>{0} high-risk command(s)</value></data>
+  <data name="RiskCountMedium" xml:space="preserve"><value>{0} medium-risk command(s)</value></data>
+  <data name="RiskRulesInvalid" xml:space="preserve"><value>Risk rules could not be read, so the previous rules are used: {0}</value></data>
+  <data name="RiskyRunTitle" xml:space="preserve"><value>Risky commands</value></data>
+  <data name="RiskyRunPrompt" xml:space="preserve"><value>This script contains {0} high-risk command(s): {1}. Run it anyway?</value></data>
+  <data name="RunAnyway" xml:space="preserve"><value>Run Anyway</value></data>
 </root>

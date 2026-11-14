@@ -31,6 +31,10 @@ public sealed class UserSettings
     public bool UseScriptAnalyzerRules { get; set; }
     /// <summary>The RFC 3161 timestamp server used when signing scripts; empty signs without a timestamp.</summary>
     public string TimestampServer { get; set; } = "";
+    /// <summary>Shades calls to commands from the risk rules in the Script Pane.</summary>
+    public bool MarkRiskyCommands { get; set; } = true;
+    /// <summary>Asks before running a script or selection that calls high-risk commands.</summary>
+    public bool ConfirmRiskyRuns { get; set; } = true;
     public int AutoSaveMinutes { get; set; } = 2;
     public int RecentFileCount { get; set; } = 10;
     public string FontFamily { get; set; } = "Lucida Console";
