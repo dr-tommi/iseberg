@@ -25,6 +25,10 @@ public sealed class UserSettings
     public bool CheckForUpdates { get; set; } = true;
     /// <summary>Display language: "en", "de", or empty to follow the operating system.</summary>
     public string Language { get; set; } = "";
+    /// <summary>Flags syntax and commands that Windows PowerShell 5.1 does not support.</summary>
+    public bool CheckWindowsPowerShellCompatibility { get; set; }
+    /// <summary>Applies PSScriptAnalyzer's default rules to the script pane.</summary>
+    public bool UseScriptAnalyzerRules { get; set; }
     public int AutoSaveMinutes { get; set; } = 2;
     public int RecentFileCount { get; set; } = 10;
     public string FontFamily { get; set; } = "Lucida Console";

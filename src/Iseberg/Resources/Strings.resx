@@ -404,4 +404,9 @@ See README.md for implemented behavior and GitHub issues for remaining work.</va
   <data name="SelectBreakpointKind" xml:space="preserve"><value>Select a breakpoint kind.</value></data>
   <data name="PositiveLineNumber" xml:space="preserve"><value>Enter a positive line number.</value></data>
   <data name="AllModulesFilter" xml:space="preserve"><value>All</value></data>
+  <data name="CompatibilityCheck" xml:space="preserve"><value>Check Windows PowerShell 5.1 Compatibility</value></data>
+  <data name="AnalyzerRules" xml:space="preserve"><value>Apply PSScriptAnalyzer Rules</value></data>
+  <data name="DiagnosticLine" xml:space="preserve"><value>Line {0}: {1}</value></data>
+  <data name="DiagnosticMore" xml:space="preserve"><value>{0} more</value></data>
+  <data name="ScriptAnalyzerUnavailable" xml:space="preserve"><value>PSScriptAnalyzer is unavailable, so only built-in checks run. Install it with Install-Module PSScriptAnalyzer -Scope CurrentUser. {0}</value></data>
 </root>

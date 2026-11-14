@@ -404,4 +404,9 @@ Den Funktionsumfang beschreibt die README.md, offene Arbeiten stehen in den GitH
   <data name="SelectBreakpointKind" xml:space="preserve"><value>Wählen Sie eine Haltepunktart aus.</value></data>
   <data name="PositiveLineNumber" xml:space="preserve"><value>Geben Sie eine positive Zeilennummer ein.</value></data>
   <data name="AllModulesFilter" xml:space="preserve"><value>Alle</value></data>
+  <data name="CompatibilityCheck" xml:space="preserve"><value>Kompatibilität mit Windows PowerShell 5.1 prüfen</value></data>
+  <data name="AnalyzerRules" xml:space="preserve"><value>PSScriptAnalyzer-Regeln anwenden</value></data>
+  <data name="DiagnosticLine" xml:space="preserve"><value>Zeile {0}: {1}</value></data>
+  <data name="DiagnosticMore" xml:space="preserve"><value>{0} weitere</value></data>
+  <data name="ScriptAnalyzerUnavailable" xml:space="preserve"><value>PSScriptAnalyzer ist nicht verfügbar, daher laufen nur die integrierten Prüfungen. Installation: Install-Module PSScriptAnalyzer -Scope CurrentUser. {0}</value></data>
 </root>

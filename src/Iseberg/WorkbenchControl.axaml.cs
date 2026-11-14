@@ -145,6 +145,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         ScriptEditor.TextArea.TextView.LineTransformers.Add(colorizer);
         ScriptEditor.TextArea.TextView.BackgroundRenderers.Add(new ScriptAdornments(
             () => displayedFile, () => CurrentFileDebugLocation(), () => settings.Theme));
+        ConfigureScriptIssues();
         breakpointMargin = new(() => displayedFile, () => CurrentFileDebugLocation(), () => settings.Theme)
         {
             Name = "BreakpointGutter",
@@ -430,9 +431,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         breakpointMargin.InvalidateVisual();
         folding?.UpdateFoldings(settings.ShowOutlining && colorizer.Analysis is { } parsed
             ? parsed.Folds.Select(f => new NewFolding(f.Start, f.End)) : [], -1);
-        Diagnostics.IsVisible = !result.Diagnostics.IsEmpty;
-        Diagnostics.Text = string.Join("  |  ", result.Diagnostics.Take(3).Select(
-            diagnostic => $"Line {ScriptEditorControl.Document.GetLineByOffset(diagnostic.Span.Start).LineNumber}: {diagnostic.Message}"));
+        RefreshScriptIssues(result);
     }
 
     private void RefreshCaret()
@@ -640,6 +639,12 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             case "Help": await ShowHelpAsync(ScriptEditor.SelectedText.Length > 0 ? ScriptEditor.SelectedText : CommandAtCaret()); break;
             case "Profiles": if (session is not null) await LoadProfilesAsync(session); break;
             case "AutoProfiles": settings.LoadProfiles = !settings.LoadProfiles; UpdateMenuState(); await SaveSettingsAsync(); break;
+            case "CompatibilityCheck":
+                settings.CheckWindowsPowerShellCompatibility = !settings.CheckWindowsPowerShellCompatibility;
+                UpdateMenuState(); ScheduleScriptIssues(); await SaveSettingsAsync(); break;
+            case "AnalyzerRules":
+                settings.UseScriptAnalyzerRules = !settings.UseScriptAnalyzerRules;
+                UpdateMenuState(); ScheduleScriptIssues(); await SaveSettingsAsync(); break;
             case "ExecutionPolicy":
                 if (session is not null && OperatingSystem.IsWindows() &&
                     await Dialogs.ChooseAsync(HostWindow, UiText.Get("ExecutionPolicyTitle"), UiText.Get("ExecutionPolicyPrompt"),
@@ -1096,6 +1101,8 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
                 "LineNumbers" => settings.ShowLineNumbers,
                 "WordWrap" => settings.WordWrap,
                 "AutoProfiles" => settings.LoadProfiles,
+                "CompatibilityCheck" => settings.CheckWindowsPowerShellCompatibility,
+                "AnalyzerRules" => settings.UseScriptAnalyzerRules,
                 "DebuggerPanes" => displayedSession?.DebuggerPaneVisible == true,
                 _ => false
             };
@@ -1290,6 +1297,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         ScriptEditor.WordWrap = settings.WordWrap;
         ScriptEditorControl.CompletionAcceptsEnter = settings.ScriptCompletionOnEnter;
         if (!settings.ScriptIntelliSense) Completion?.Close();
+        ScheduleScriptIssues();
         if (!settings.ConsoleIntelliSense && Completion?.TextArea == ConsoleEditor.TextArea) Completion.Close();
         WorkbenchMenu.IsVisible = hostingOptions.ShowMenu;
         WorkbenchToolbar.IsVisible = hostingOptions.ShowToolbar && settings.ShowToolbar;

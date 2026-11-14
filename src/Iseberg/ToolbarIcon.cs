@@ -122,9 +122,9 @@ public sealed class ToolbarIcon : Control
             case "Clear":
                 Shape("M12,1 L16,3 9,15 3,12 Z", Brushes.Khaki);
                 Shape("M3,12 L9,15 7,18 1,15 Z", Brushes.SteelBlue); break;
-            case "Profiles": case "AutoProfiles": case "ExecutionPolicy":
+            case "Profiles": case "AutoProfiles": case "ExecutionPolicy": case "CompatibilityCheck": case "AnalyzerRules":
                 Shape("M3,1 L15,1 15,17 3,17 Z", Brushes.White);
-                Shape(Kind is "Profiles" or "AutoProfiles" ? "M6,5 L12,5 M6,8 L12,8 M6,11 L10,11" : "M5,8 L8,12 13,5", Brushes.Transparent); break;
+                Shape(Kind is not "ExecutionPolicy" ? "M6,5 L12,5 M6,8 L12,8 M6,11 L10,11" : "M5,8 L8,12 13,5", Brushes.Transparent); break;
             case "SelectAll":
                 Shape("M2,2 L16,2 16,16 2,16 Z M5,5 L13,5 M5,9 L13,9 M5,13 L13,13", Brushes.Transparent); break;
             case "ZoomIn": case "ZoomOut":

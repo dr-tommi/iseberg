@@ -213,6 +213,7 @@ public sealed partial class WorkbenchControl
         IsEnabled = false;
         ++commandRequestVersion;
         windowCancellation.Cancel();
+        DisposeScriptIssues();
         outputTimer.Stop(); autoSaveTimer.Stop(); completionTimer.Stop(); persistenceTimer.Stop();
         Completion?.Close();
         commandFormCancellation?.Cancel();

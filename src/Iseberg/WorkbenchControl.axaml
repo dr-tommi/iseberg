@@ -73,6 +73,10 @@
         <MenuItem Header="Load PowerShell _Profiles" Tag="Profiles" Click="OnAction" />
         <MenuItem Header="Load profiles in new PowerShell tabs" Tag="AutoProfiles" ToggleType="CheckBox" Click="OnAction" />
         <MenuItem Header="Enable Local Scripts (Process Only)..." Tag="ExecutionPolicy" Click="OnAction" />
+        <Separator />
+        <MenuItem Header="Check Windows PowerShell 5.1 Compatibility" Tag="CompatibilityCheck" ToggleType="CheckBox" Click="OnAction" />
+        <MenuItem Header="Apply PSScriptAnalyzer Rules" Tag="AnalyzerRules" ToggleType="CheckBox" Click="OnAction" />
+        <Separator />
         <MenuItem Header="_Options..." Tag="Options" Click="OnAction" />
       </MenuItem>
       <MenuItem Header="_Debug">
