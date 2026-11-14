@@ -175,6 +175,16 @@ Other double-brace text is left unchanged. Scripts created from a template are u
 
 If local `.ps1` files are still blocked, use **Tools > Enable Local Scripts (Process Only)** and explicitly approve `RemoteSigned`. This changes only the application process, affects all its runspaces, and does not override Group Policy or change user/machine settings.
 
+### Signing scripts
+
+**File > Sign Script** signs the current script with Authenticode, for environments that require `AllSigned` or signed downloads. It works on saved local scripts while the PowerShell tab is idle; unsaved edits are saved first after confirmation.
+
+The dialog lists the code-signing certificates from the personal stores of the current user and the computer that have a private key and are currently valid. **Load from PFX File** adds a certificate from a `.pfx` or `.p12` file; its password is used only to open the file and is not stored. Scripts are signed with SHA-256 and include the certificate chain without its root.
+
+The optional **timestamp server** (an RFC 3161 URL, remembered between sessions) keeps the signature valid after the certificate expires. Signing with a timestamp sends the script's hash to that server, so none is preset; enter your organization's server or a public one.
+
+After signing, the Script Pane reloads the file with its signature block. **File > Check Signature** shows the status of the saved file, the signer, the thumbprint, and the timestamp. Saving edits to a signed script invalidates its signature; the status bar then asks you to sign it again. Signing a script without a Byte Order Mark is fine: Authenticode signs the file's bytes, so Windows PowerShell 5.1 validates it the same way.
+
 ### Saved and unsaved scripts
 
 Running named files uses their real paths, preserving `$PSScriptRoot`, `$PSCommandPath`, and debugger source locations.

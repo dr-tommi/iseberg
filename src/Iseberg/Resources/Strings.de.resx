@@ -425,4 +425,32 @@ Den Funktionsumfang beschreibt die README.md, offene Arbeiten stehen in den GitH
   <data name="NoQuickFix" xml:space="preserve"><value>An der Einfügemarke gibt es keine automatische Korrektur.</value></data>
   <data name="NothingToCorrect" xml:space="preserve"><value>Es gibt nichts zu ändern.</value></data>
   <data name="CorrectionDiscarded" xml:space="preserve"><value>Das Skript wurde inzwischen geändert, daher wurde das Ergebnis verworfen. Bitte erneut versuchen.</value></data>
+  <data name="SignScript" xml:space="preserve"><value>Skript si_gnieren...</value></data>
+  <data name="CheckSignature" xml:space="preserve"><value>Signa_tur prüfen</value></data>
+  <data name="SigningCertificates" xml:space="preserve"><value>Codesignatur-Zertifikat:</value></data>
+  <data name="NoSigningCertificates" xml:space="preserve"><value>In den persönlichen Zertifikatspeichern von Benutzer und Computer wurde kein verwendbares Codesignatur-Zertifikat gefunden. Laden Sie eines aus einer PFX-Datei.</value></data>
+  <data name="CertificateLine" xml:space="preserve"><value>{0}  (ausgestellt von {1}, gültig bis {2:d}, {3})</value></data>
+  <data name="TimestampServer" xml:space="preserve"><value>Zeitstempelserver (optional):</value></data>
+  <data name="TimestampServerHint" xml:space="preserve"><value>Leer: kein Zeitstempel. Ein Zeitstempel hält die Signatur nach Ablauf des Zertifikats gültig.</value></data>
+  <data name="SignButton" xml:space="preserve"><value>Signieren</value></data>
+  <data name="LoadPfx" xml:space="preserve"><value>Aus PFX-Datei laden...</value></data>
+  <data name="PfxFiles" xml:space="preserve"><value>Zertifikatsdateien (*.pfx, *.p12)</value></data>
+  <data name="LocalPfxOnly" xml:space="preserve"><value>Es werden nur lokale Zertifikatsdateien unterstützt.</value></data>
+  <data name="PfxPassword" xml:space="preserve"><value>Kennwort für {0}:</value></data>
+  <data name="PfxNotUsable" xml:space="preserve"><value>Mit diesem Zertifikat lassen sich keine Skripts signieren: Es benötigt einen privaten Schlüssel, die Verwendung Codesignatur und einen aktuellen Gültigkeitszeitraum.</value></data>
+  <data name="SaveBeforeSigning" xml:space="preserve"><value>{0} vor dem Signieren speichern?</value></data>
+  <data name="ScriptSigned" xml:space="preserve"><value>Skript signiert. Signatur: {0}</value></data>
+  <data name="SignatureSigner" xml:space="preserve"><value>Signiert von: {0}</value></data>
+  <data name="SignatureThumbprint" xml:space="preserve"><value>Fingerabdruck: {0}</value></data>
+  <data name="SignatureTimestamp" xml:space="preserve"><value>Zeitstempel: {0}</value></data>
+  <data name="SignatureNoTimestamp" xml:space="preserve"><value>Kein Zeitstempel: Die Signatur wird mit Ablauf des Zertifikats ungültig.</value></data>
+  <data name="SignatureOfSavedFile" xml:space="preserve"><value>Die Prüfung betrifft die gespeicherte Datei, nicht ungespeicherte Änderungen.</value></data>
+  <data name="SignatureInvalidatedBySave" xml:space="preserve"><value>Gespeichert. Die Änderungen haben die Skriptsignatur ungültig gemacht; signieren Sie das Skript erneut.</value></data>
+  <data name="SignatureValid" xml:space="preserve"><value>gültig</value></data>
+  <data name="SignatureNotSigned" xml:space="preserve"><value>nicht signiert</value></data>
+  <data name="SignatureHashMismatch" xml:space="preserve"><value>ungültig: Das Skript wurde nach dem Signieren geändert</value></data>
+  <data name="SignatureUnknownError" xml:space="preserve"><value>unverändert, aber die Zertifikatskette endet nicht bei einem vertrauenswürdigen Stamm</value></data>
+  <data name="SignatureNotTrusted" xml:space="preserve"><value>nicht vertrauenswürdig: Der Signierer gilt auf diesem Computer nicht als vertrauenswürdig</value></data>
+  <data name="SignatureIncompatible" xml:space="preserve"><value>inkompatibles Signaturformat</value></data>
+  <data name="SignatureNotSupportedFileFormat" xml:space="preserve"><value>dieser Dateityp kann nicht signiert werden</value></data>
 </root>

@@ -425,4 +425,32 @@ See README.md for implemented behavior and GitHub issues for remaining work.</va
   <data name="NoQuickFix" xml:space="preserve"><value>There is no automatic fix at the caret.</value></data>
   <data name="NothingToCorrect" xml:space="preserve"><value>Nothing to change.</value></data>
   <data name="CorrectionDiscarded" xml:space="preserve"><value>The script changed meanwhile, so the result was discarded. Try again.</value></data>
+  <data name="SignScript" xml:space="preserve"><value>Si_gn Script...</value></data>
+  <data name="CheckSignature" xml:space="preserve"><value>Check Signa_ture</value></data>
+  <data name="SigningCertificates" xml:space="preserve"><value>Code-signing certificate:</value></data>
+  <data name="NoSigningCertificates" xml:space="preserve"><value>No usable code-signing certificate was found in the personal certificate stores of the user or the computer. Load one from a PFX file.</value></data>
+  <data name="CertificateLine" xml:space="preserve"><value>{0}  (issued by {1}, valid until {2:d}, {3})</value></data>
+  <data name="TimestampServer" xml:space="preserve"><value>Timestamp server (optional):</value></data>
+  <data name="TimestampServerHint" xml:space="preserve"><value>Empty: no timestamp. A timestamp keeps the signature valid after the certificate expires.</value></data>
+  <data name="SignButton" xml:space="preserve"><value>Sign</value></data>
+  <data name="LoadPfx" xml:space="preserve"><value>Load from PFX File...</value></data>
+  <data name="PfxFiles" xml:space="preserve"><value>Certificate files (*.pfx, *.p12)</value></data>
+  <data name="LocalPfxOnly" xml:space="preserve"><value>Only local certificate files are supported.</value></data>
+  <data name="PfxPassword" xml:space="preserve"><value>Password for {0}:</value></data>
+  <data name="PfxNotUsable" xml:space="preserve"><value>This certificate cannot sign scripts: it needs a private key, code-signing usage, and a current validity period.</value></data>
+  <data name="SaveBeforeSigning" xml:space="preserve"><value>Save {0} before signing it?</value></data>
+  <data name="ScriptSigned" xml:space="preserve"><value>Script signed. Signature: {0}</value></data>
+  <data name="SignatureSigner" xml:space="preserve"><value>Signer: {0}</value></data>
+  <data name="SignatureThumbprint" xml:space="preserve"><value>Thumbprint: {0}</value></data>
+  <data name="SignatureTimestamp" xml:space="preserve"><value>Timestamp: {0}</value></data>
+  <data name="SignatureNoTimestamp" xml:space="preserve"><value>No timestamp: the signature becomes invalid when the certificate expires.</value></data>
+  <data name="SignatureOfSavedFile" xml:space="preserve"><value>The check applies to the saved file, not to unsaved edits.</value></data>
+  <data name="SignatureInvalidatedBySave" xml:space="preserve"><value>Saved. The edits invalidated the script signature; sign the script again.</value></data>
+  <data name="SignatureValid" xml:space="preserve"><value>valid</value></data>
+  <data name="SignatureNotSigned" xml:space="preserve"><value>not signed</value></data>
+  <data name="SignatureHashMismatch" xml:space="preserve"><value>invalid: the script was changed after signing</value></data>
+  <data name="SignatureUnknownError" xml:space="preserve"><value>intact, but the certificate chain does not end in a trusted root</value></data>
+  <data name="SignatureNotTrusted" xml:space="preserve"><value>not trusted: the signer is not trusted on this computer</value></data>
+  <data name="SignatureIncompatible" xml:space="preserve"><value>incompatible signature format</value></data>
+  <data name="SignatureNotSupportedFileFormat" xml:space="preserve"><value>this file type cannot be signed</value></data>
 </root>

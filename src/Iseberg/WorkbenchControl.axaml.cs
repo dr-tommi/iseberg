@@ -665,6 +665,8 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             case "Options": await OptionsAsync(); break;
             case "CheckForUpdates": await CheckForUpdatesAsync(automatic: false); break;
             case "Print": await PrintScriptAsync(); break;
+            case "SignScript": await SignScriptAsync(); break;
+            case "CheckSignature": await CheckSignatureAsync(); break;
             case "About":
                 await Dialogs.ShowTextAsync(HostWindow, UiText.Get("AboutTitle"),
                     string.Format(UiText.Get("AboutText"), ApplicationVersion, session?.Engine.Version));
@@ -767,6 +769,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         }
         RememberFile(path);
         RefreshCaret();
+        await NoteSignatureAfterSaveAsync(tab);
         return true;
     }
 
@@ -1151,6 +1154,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
                 "Undo" or "Redo" or "Cut" or "Copy" or "Paste" or "SelectAll" => CanEdit(action),
                 "Replace" => !paused,
                 "FormatDocument" or "QuickFix" or "CleanUp" => CanCorrectScript,
+                "SignScript" or "CheckSignature" => CanSignScript,
                 "CheckForUpdates" => !checkingForUpdates,
                 _ => true
             };

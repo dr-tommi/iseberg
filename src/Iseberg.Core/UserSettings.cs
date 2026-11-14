@@ -29,6 +29,8 @@ public sealed class UserSettings
     public bool CheckWindowsPowerShellCompatibility { get; set; }
     /// <summary>Applies PSScriptAnalyzer's default rules to the script pane.</summary>
     public bool UseScriptAnalyzerRules { get; set; }
+    /// <summary>The RFC 3161 timestamp server used when signing scripts; empty signs without a timestamp.</summary>
+    public string TimestampServer { get; set; } = "";
     public int AutoSaveMinutes { get; set; } = 2;
     public int RecentFileCount { get; set; } = 10;
     public string FontFamily { get; set; } = "Lucida Console";
@@ -76,6 +78,7 @@ public sealed class UserSettings
         if (RecentFiles.Count > RecentFileCount) RecentFiles.RemoveRange(RecentFileCount, RecentFiles.Count - RecentFileCount);
         if (Layout is not ("Top" or "Right" or "Maximized")) Layout = "Top";
         if (Language is not ("en" or "de")) Language = "";
+        TimestampServer = TimestampServer?.Trim() ?? "";
         DebuggerSessions ??= [];
         if (DebuggerSessions.Any(session => session is null || string.IsNullOrWhiteSpace(session.Name)) ||
             DebuggerSessions.DistinctBy(session => session.Name).Count() != DebuggerSessions.Count)

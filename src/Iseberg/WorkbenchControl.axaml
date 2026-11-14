@@ -16,6 +16,8 @@
         <MenuItem Tag="Encoding" Click="OnAction" />
         <MenuItem Tag="Reload" Click="OnAction" />
         <MenuItem Tag="Print" InputGesture="Ctrl+P" Click="OnAction" />
+        <MenuItem Tag="SignScript" Click="OnAction" />
+        <MenuItem Tag="CheckSignature" Click="OnAction" />
         <Separator />
         <MenuItem Header="_Close" InputGesture="Ctrl+W" Tag="Close" Click="OnAction" />
         <MenuItem x:Name="RecentMenu" Header="Recent _Files" />

@@ -32,6 +32,12 @@ public sealed class ToolbarIcon : Control
         switch (Kind)
         {
             case "New": Shape("M3,1 L11,1 15,5 15,17 3,17 Z", Brushes.White); Shape("M11,1 L11,5 15,5", Brushes.LightGray); break;
+            case "SignScript":
+                Shape("M3,1 L11,1 15,5 15,17 3,17 Z", Brushes.White);
+                Shape("M5,13 C7,9 8,15 10,11 C11,9 12,13 13,12", Brushes.Transparent); break;
+            case "CheckSignature":
+                Shape("M3,1 L11,1 15,5 15,17 3,17 Z", Brushes.White);
+                Shape("M5,10 L8,13 13,6", Brushes.Transparent); break;
             case "FormatDocument":
                 Shape("M2,4 L16,4 M5,8 L16,8 M5,12 L16,12 M2,16 L16,16", Brushes.Transparent); break;
             case "QuickFix":
