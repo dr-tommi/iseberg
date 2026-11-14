@@ -52,7 +52,7 @@ public sealed class ScriptAnalyzerService : IDisposable
         {
             ObjectDisposedException.ThrowIf(disposed, this);
             var moduleIssues = await Task.Run(() => InvokeAnalyzer(text, options, cancellationToken), cancellationToken);
-            if (moduleIssues is not null) issues.AddRange(moduleIssues);
+            if (moduleIssues is not null) issues.AddRange(WithoutScriptDefinedCommands(text, moduleIssues));
             return new(issues.OrderBy(issue => issue.Start).ThenByDescending(issue => issue.Severity).ToArray(),
                 moduleError is null, moduleError);
         }
@@ -100,6 +100,29 @@ public sealed class ScriptAnalyzerService : IDisposable
             }
         }
         return issues;
+    }
+
+    /// <summary>
+    /// PSUseCompatibleCommands reports calls to functions the script defines itself when another platform profile
+    /// knows a command of that name (for example Write-Log). Those calls are not compatibility problems.
+    /// </summary>
+    public static IEnumerable<ScriptIssue> WithoutScriptDefinedCommands(string text, IEnumerable<ScriptIssue> issues)
+    {
+        ArgumentNullException.ThrowIfNull(text);
+        ArgumentNullException.ThrowIfNull(issues);
+        var functions = Parser.ParseInput(text, out _, out _)
+            .FindAll(node => node is FunctionDefinitionAst, searchNestedScriptBlocks: true)
+            .Cast<FunctionDefinitionAst>().Select(function => function.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        // The finding covers the whole command call, so compare the command name it starts with.
+        string CommandName(ScriptIssue issue)
+        {
+            var end = issue.Start;
+            while (end < text.Length && end < issue.Start + issue.Length && !char.IsWhiteSpace(text[end]) && text[end] is not (';' or '|' or ')' or '}'))
+                end++;
+            return text[issue.Start..end];
+        }
+        return functions.Count == 0 ? issues : issues.Where(issue => issue.Rule != "PSUseCompatibleCommands" ||
+            issue.Start >= text.Length || !functions.Contains(CommandName(issue)));
     }
 
     /// <summary>The PSScriptAnalyzer settings for the chosen checks, or null when only its default rules run.</summary>

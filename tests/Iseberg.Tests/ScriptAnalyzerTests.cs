@@ -53,6 +53,19 @@ public sealed class ScriptAnalyzerTests
         Assert.Equal(expected, ScriptAnalyzerService.OffsetOf(text, line, column));
 
     [Fact]
+    public void CallsToScriptDefinedFunctionsAreNotCompatibilityIssues()
+    {
+        const string text = "function Write-Log { }\nWrite-Log -Message 'x'\nGet-Thing -Parallel";
+        var issues = new ScriptIssue[]
+        {
+            new("PSUseCompatibleCommands", "command", ScriptIssueSeverity.Warning, text.IndexOf("Write-Log -", StringComparison.Ordinal), 23),
+            new("PSUseCompatibleCommands", "parameter", ScriptIssueSeverity.Warning, text.IndexOf("-Parallel", StringComparison.Ordinal), 9),
+            new("PSAvoidSomething", "other rule", ScriptIssueSeverity.Warning, text.IndexOf("Write-Log -", StringComparison.Ordinal), 9)
+        };
+        Assert.Equal(["parameter", "other rule"], ScriptAnalyzerService.WithoutScriptDefinedCommands(text, issues).Select(issue => issue.Message));
+    }
+
+    [Fact]
     public void SettingsLimitTheModuleToTheChosenChecks()
     {
         Assert.Null(ScriptAnalyzerService.CreateSettings(new(false, true)));
