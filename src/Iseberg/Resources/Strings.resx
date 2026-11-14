@@ -409,4 +409,11 @@ See README.md for implemented behavior and GitHub issues for remaining work.</va
   <data name="DiagnosticLine" xml:space="preserve"><value>Line {0}: {1}</value></data>
   <data name="DiagnosticMore" xml:space="preserve"><value>{0} more</value></data>
   <data name="ScriptAnalyzerUnavailable" xml:space="preserve"><value>PSScriptAnalyzer is unavailable, so only built-in checks run. Install it with Install-Module PSScriptAnalyzer -Scope CurrentUser. {0}</value></data>
+  <data name="NewFromTemplate" xml:space="preserve"><value>New from _Template...</value></data>
+  <data name="TemplatesTitle" xml:space="preserve"><value>Templates</value></data>
+  <data name="TemplatePreview" xml:space="preserve"><value>Template preview</value></data>
+  <data name="CreateFromTemplate" xml:space="preserve"><value>Create</value></data>
+  <data name="OpenTemplateFolder" xml:space="preserve"><value>Open Template Folder</value></data>
+  <data name="NoTemplates" xml:space="preserve"><value>No templates found. Add .ps1 files to {0}.</value></data>
+  <data name="TemplateFolderOpenFailed" xml:space="preserve"><value>The template folder could not be opened.</value></data>
 </root>

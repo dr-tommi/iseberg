@@ -334,13 +334,18 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
     private void NewFile()
     {
         if (Workbench.SelectedSession is not { } session) return;
-        string name;
-        do { name = $"Untitled{++fileNumber}.ps1"; }
-        while (Workbench.Sessions.SelectMany(candidate => candidate.Files).Any(tab => tab.File.Name == name));
-        var file = new ScriptTab(new ScriptFile(name));
+        var file = new ScriptTab(new ScriptFile(NextUntitledName()));
         session.Files.Add(file);
         session.SelectedFile = file;
         DisplayFile();
+    }
+
+    private string NextUntitledName()
+    {
+        string name;
+        do { name = $"Untitled{++fileNumber}.ps1"; }
+        while (Workbench.Sessions.SelectMany(candidate => candidate.Files).Any(tab => tab.File.Name == name));
+        return name;
     }
 
     private void OnSessionChanged(object? sender, SelectionChangedEventArgs e)
@@ -502,6 +507,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
         switch (action)
         {
             case "New": NewFile(); break;
+            case "NewFromTemplate": await NewFromTemplateAsync(); break;
             case "Open": await PickFilesAsync(); break;
             case "Save": if (displayedFile is not null) await SaveFileAsync(displayedFile); break;
             case "SaveAs": if (displayedFile is not null) await SaveFileAsync(displayedFile, true); break;
@@ -1795,7 +1801,7 @@ public sealed partial class WorkbenchControl : UserControl, IAsyncDisposable
             Key.F11 => shift ? "StepOut" : "StepInto",
             Key.F1 => ctrl ? "ShowCommand" : "Help",
             Key.Pause when ctrl => e.KeyModifiers.HasFlag(KeyModifiers.Alt) ? "BreakAll" : "Stop",
-            Key.N when ctrl => "New",
+            Key.N when ctrl => shift ? "NewFromTemplate" : "New",
             Key.O when ctrl => "Open",
             Key.P when ctrl => "Print",
             Key.S when ctrl => shift ? "SaveAs" : "Save",

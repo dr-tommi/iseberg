@@ -129,6 +129,21 @@ Local PowerShell tabs expose a supported `$psISE` subset for live script-file/ed
 
 See [ISE scripting compatibility](ise-compatibility.md) for member signatures, profile/menu examples, snippet workflows, and explicit unsupported boundaries. This is not binary ISE compatibility: WPF tools are unsupported on **all platforms, including Windows**, and cannot run natively on Linux/macOS. The PowerShell 7/Avalonia architecture is unchanged.
 
+## Script templates
+
+**File > New from Template** (Ctrl+Shift+N) starts a new script from a template. Templates are the `.ps1` files in `%LOCALAPPDATA%\Iseberg\Templates`; the file name is the name shown in the list. Add, edit, or delete them in a file manager, or use **Open Template Folder** in the dialog. The first use creates the folder with two Windows PowerShell 5.1-compatible starter templates, an advanced function and a script with logging; an existing folder is never changed, so deleted starter templates do not return.
+
+These placeholders are filled in when the script is created:
+
+| Placeholder | Replaced with |
+|---|---|
+| `{{Date}}` | Today's date as `yyyy-MM-dd` |
+| `{{Author}}` | The signed-in user name |
+| `{{Computer}}` | The computer name |
+| `{{Cursor}}` | Nothing; the caret starts here |
+
+Other double-brace text is left unchanged. Scripts created from a template are untitled and are saved as **UTF-8 with BOM**, so Windows PowerShell 5.1 reads non-ASCII text such as umlauts correctly.
+
 ## Execution and profiles
 
 ### Execution policy

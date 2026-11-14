@@ -8,6 +8,7 @@
     <Menu x:Name="WorkbenchMenu" Grid.Row="0">
       <MenuItem Header="_File">
         <MenuItem Header="_New" InputGesture="Ctrl+N" Tag="New" Click="OnAction" />
+        <MenuItem Header="New from _Template..." InputGesture="Ctrl+Shift+N" Tag="NewFromTemplate" Click="OnAction" />
         <MenuItem Header="_Open..." InputGesture="Ctrl+O" Tag="Open" Click="OnAction" />
         <MenuItem Header="_Save" InputGesture="Ctrl+S" Tag="Save" Click="OnAction" />
         <MenuItem Header="Save _As..." InputGesture="Ctrl+Shift+S" Tag="SaveAs" Click="OnAction" />

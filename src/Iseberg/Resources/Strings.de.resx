@@ -409,4 +409,11 @@ Den Funktionsumfang beschreibt die README.md, offene Arbeiten stehen in den GitH
   <data name="DiagnosticLine" xml:space="preserve"><value>Zeile {0}: {1}</value></data>
   <data name="DiagnosticMore" xml:space="preserve"><value>{0} weitere</value></data>
   <data name="ScriptAnalyzerUnavailable" xml:space="preserve"><value>PSScriptAnalyzer ist nicht verfügbar, daher laufen nur die integrierten Prüfungen. Installation: Install-Module PSScriptAnalyzer -Scope CurrentUser. {0}</value></data>
+  <data name="NewFromTemplate" xml:space="preserve"><value>Neu aus _Vorlage...</value></data>
+  <data name="TemplatesTitle" xml:space="preserve"><value>Vorlagen</value></data>
+  <data name="TemplatePreview" xml:space="preserve"><value>Vorlagenvorschau</value></data>
+  <data name="CreateFromTemplate" xml:space="preserve"><value>Erstellen</value></data>
+  <data name="OpenTemplateFolder" xml:space="preserve"><value>Vorlagenordner öffnen</value></data>
+  <data name="NoTemplates" xml:space="preserve"><value>Keine Vorlagen gefunden. Legen Sie .ps1-Dateien in {0} ab.</value></data>
+  <data name="TemplateFolderOpenFailed" xml:space="preserve"><value>Der Vorlagenordner konnte nicht geöffnet werden.</value></data>
 </root>
