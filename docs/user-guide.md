@@ -133,7 +133,9 @@ See [ISE scripting compatibility](ise-compatibility.md) for member signatures, p
 
 ### Execution policy
 
-**Windows execution policy is respected.** If local `.ps1` files are blocked, use **Tools > Enable Local Scripts (Process Only)** and explicitly approve `RemoteSigned`. This changes only the application process, affects all its runspaces, and does not override Group Policy or change user/machine settings.
+**Windows execution policy is respected.** Like an installed PowerShell 7, the full Windows distribution ships a `powershell.config.json` beside its embedded engine that sets the `LocalMachine` scope to `RemoteSigned`: saved local scripts run, downloaded scripts need a trusted signature. Group Policy and the `CurrentUser` and `Process` scopes still take precedence. The compact distribution uses the installed PowerShell's configuration instead.
+
+If local `.ps1` files are still blocked, use **Tools > Enable Local Scripts (Process Only)** and explicitly approve `RemoteSigned`. This changes only the application process, affects all its runspaces, and does not override Group Policy or change user/machine settings.
 
 ### Saved and unsaved scripts
 

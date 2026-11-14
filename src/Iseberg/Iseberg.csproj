@@ -9,6 +9,10 @@
     <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <!-- Without a runtime identifier the engine stays in its NuGet layout; RID builds and publishes flatten it. -->
+    <IsebergPowerShellHome Condition="'$(RuntimeIdentifier)' == ''">runtimes\win\lib\$(TargetFramework)\</IsebergPowerShellHome>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(IsebergCompact)' == 'true'">
     <DefineConstants>$(DefineConstants);ISEBERG_COMPACT</DefineConstants>
   </PropertyGroup>
@@ -27,6 +31,12 @@
                         ($([System.String]::Copy('$(RuntimeIdentifier)').StartsWith('win-')) Or
                          ('$(RuntimeIdentifier)' == '' And '$(OS)' == 'Windows_NT'))">
     <Content Include="..\..\packaging\pwsh_ise.cmd" Link="pwsh_ise.cmd"
+             CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <!-- The embedded engine reads its LocalMachine execution policy from $PSHOME\powershell.config.json, where $PSHOME
+         is the folder of System.Management.Automation.dll. Like an installed PowerShell 7, default to RemoteSigned;
+         Group Policy and the CurrentUser/Process scopes still take precedence. -->
+    <Content Include="..\..\packaging\powershell.config.json"
+             Link="$(IsebergPowerShellHome)powershell.config.json"
              CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="ValidateCompactPublish" BeforeTargets="PrepareForPublish" Condition="'$(IsebergCompact)' == 'true'">
