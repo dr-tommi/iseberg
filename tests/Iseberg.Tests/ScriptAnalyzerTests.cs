@@ -5,6 +5,8 @@ using Xunit;
 
 namespace Iseberg.Tests;
 
+// Loading the analyzer is CPU-heavy for several seconds; running it alone keeps timing-sensitive desktop tests stable.
+[Collection(PowerShellPolicyCollection.Name)]
 public sealed class ScriptAnalyzerTests
 {
     private static readonly ScriptAnalyzerOptions CompatibilityOnly = new(WindowsPowerShellCompatibility: true, DefaultRules: false);
