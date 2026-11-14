@@ -121,8 +121,24 @@ public sealed class EditingFeatureTests
         Assert.Equal(snippet, Assert.Single(SnippetCatalog.Parse(xml)));
         Assert.Throws<XmlException>(() => SnippetCatalog.Parse("<!DOCTYPE Snippets [<!ENTITY value 'bad'>]><Snippets/>"));
         Assert.Throws<InvalidDataException>(() => SnippetCatalog.Parse("<Snippets/>"));
-        Assert.Throws<InvalidDataException>(() => SnippetCatalog.Parse(xml.Replace("CaretOffset=\"17\"", "CaretOffset=\"999\"")));
+        Assert.Throws<InvalidDataException>(() => SnippetCatalog.Parse(xml.Replace("CaretOffset=\"17\"", "CaretOffset=\"-2\"")));
+        Assert.Throws<InvalidDataException>(() => SnippetCatalog.Parse(xml.Replace("CaretOffset=\"17\"", "CaretOffset=\"end\"")));
         Assert.Throws<InvalidDataException>(() => SnippetCatalog.Parse(xml.Replace("Version=\"1.0.0\"", "Version=\"2.0.0\"")));
+    }
+
+    [Theory]
+    [InlineData(44)]
+    [InlineData(999)]
+    public void SnippetCaretOffsetsPastTheCodeAreClampedToItsEnd(int offset)
+    {
+        // Published snippet packs, such as BasicSnippetPack, point one character past the code.
+        const string code = "foreach ($item in $collection) {\n\t\n\t$item\n}";
+        var xml = SnippetCatalog.Serialize([new PowerShellSnippet("foreach", "foreach loop", "", code, 10)])
+            .Replace("CaretOffset=\"10\"", $"CaretOffset=\"{offset}\"");
+        var snippet = Assert.Single(SnippetCatalog.Parse(xml));
+        Assert.Equal(code.Length, snippet.CaretOffset);
+        var expanded = snippet.Expand("", "\n");
+        Assert.Equal(expanded.Text.Length, expanded.Caret);
     }
 
     [Fact]

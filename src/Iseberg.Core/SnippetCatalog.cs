@@ -205,8 +205,10 @@ public static class SnippetCatalog
                 ?? throw new InvalidDataException($"Snippet '{title}' is missing its PowerShell Script.");
             var offset = -1;
             if (script.Attribute("CaretOffset") is { } caret &&
-                (!int.TryParse(caret.Value, out offset) || offset < 0 || offset > script.Value.Length))
+                (!int.TryParse(caret.Value, out offset) || offset < 0))
                 throw new InvalidDataException($"Snippet '{title}' has an invalid CaretOffset.");
+            // Published snippet packs often point one or more characters past the code; place the caret at its end.
+            offset = Math.Min(offset, script.Value.Length);
             var indent = true;
             if (script.Attribute("Indent") is { } indentation && !bool.TryParse(indentation.Value, out indent))
                 throw new InvalidDataException($"Snippet '{title}' has an invalid Indent value.");
